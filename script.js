@@ -6,8 +6,7 @@
 const CAREERS_CSV_URL = ""; 
 
 // SMK Tachileik Contact Details
-const STORE_PHONE = "959690607777"; // 09690607777
-const STORE_PHONE_ALT = "959690467777"; // 09690467777
+const STORE_PHONE = "959690607777"; 
 
 // Default Jobs Fallback in case Google Sheet is empty or not yet connected
 const defaultJobs = [
@@ -73,7 +72,6 @@ function fetchCareersData() {
             }
         });
     } else {
-        // Render built-in fallback jobs immediately
         renderJobs(defaultJobs);
     }
 }
@@ -84,7 +82,7 @@ function renderJobs(jobsList) {
 
     jobsList.forEach(job => {
         const card = document.createElement('div');
-        card.className = 'job-card';
+        card.className = 'job-card shadow-card';
         card.innerHTML = `
             <div>
                 <div class="job-meta-row">
