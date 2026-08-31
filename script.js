@@ -16,7 +16,7 @@ const defaultJobs = [
         department: "Operations & Maintenance",
         location: "Tachileik (တာချီလိတ်)",
         type: "Full-Time",
-        description: "တာချီလိတ်မြို့တွင်း Fiber Cable သွယ်တန်းခြင်း၊ Splicing ပြုလုပ်ခြင်းနှင့် အိမ်သုံး Router များ တပ်ဆင်ပြုပြင်ပေးနိုင်သူ။ (အတွေ့အကြုံရှိသူ ဦးစားပေးမည်။)"
+        description: "တာချီလိတ်မြို့တွင်း Fiber Cable သွယ်တန်းခြင်း၊ Splicing ပြုလုပ်ခြင်းနှင့် အိမ်သုံး Router များ တပ်ဆင်ပြုပြင်ပေးနိုင်သူ။ အဖွဲ့အစည်းနှင့် ပူးပေါင်းလုပ်ဆောင်နိုင်ပြီး အတွေ့အကြုံရှိသူများကို ဦးစားပေးရွေးချယ်သွားမည်ဖြစ်ပါသည်။"
     },
     {
         id: "JOB-02",
@@ -24,7 +24,7 @@ const defaultJobs = [
         department: "Technical Support",
         location: "Tachileik (တာချီလိတ်)",
         type: "Shift Schedule",
-        description: "ကွန်ရက်လိုင်းများ စောင့်ကြည့်စစ်ဆေးခြင်း (Network Monitoring) နှင့် Customer များ၏ လိုင်းပြဿနာများကို ဖုန်း၊ အွန်လိုင်းမှ ဖြေရှင်းပေးနိုင်သူ။"
+        description: "ကွန်ရက်လိုင်းများ စောင့်ကြည့်စစ်ဆေးခြင်း (Network Monitoring) နှင့် Customer များ၏ လိုင်းပြဿနာများကို ဖုန်း၊ အွန်လိုင်းမှ ဖြေရှင်းပေးနိုင်သူ။ ဆက်သွယ်ပြောဆိုမှု ကောင်းမွန်ပြီး ညဆိုင်း တာဝန်ထမ်းဆောင်နိုင်ရမည်။"
     },
     {
         id: "JOB-03",
@@ -32,7 +32,7 @@ const defaultJobs = [
         department: "Commercial Sales",
         location: "Tachileik (တာချီလိတ်)",
         type: "Full-Time",
-        description: "လူနေရပ်ကွက်များနှင့် စီးပွားရေးလုပ်ငန်းများသို့ SMK အင်တာနက် အစီအစဉ်များ မိတ်ဆက်ဖြန့်ချိပေးနိုင်သူ။ (Communication Skill ကောင်းမွန်ရမည်။)"
+        description: "လူနေရပ်ကွက်များနှင့် စီးပွားရေးလုပ်ငန်းများသို့ SMK အင်တာနက် အစီအစဉ်များ မိတ်ဆက်ဖြန့်ချိပေးနိုင်သူ။ Marketing နယ်ပယ်တွင် စိတ်ဝင်စားမှုရှိပြီး အပြင်ထွက်၍ Active ဖြစ်ဖြစ် လုပ်ကိုင်နိုင်သူများကို ကြိုဆိုပါသည်။"
     }
 ];
 
@@ -86,6 +86,18 @@ function fetchCareersData() {
     }
 }
 
+// Global JS function to expand/collapse long Job Descriptions
+window.toggleJobDesc = function(btnElement) {
+    const descContent = btnElement.previousElementSibling;
+    if (descContent.classList.contains('expanded')) {
+        descContent.classList.remove('expanded');
+        btnElement.innerHTML = 'Read More <i class="fas fa-chevron-down"></i>';
+    } else {
+        descContent.classList.add('expanded');
+        btnElement.innerHTML = 'Show Less <i class="fas fa-chevron-up"></i>';
+    }
+};
+
 function renderJobs(jobsList) {
     const container = document.getElementById('jobs-container');
     container.innerHTML = '';
@@ -93,6 +105,7 @@ function renderJobs(jobsList) {
     jobsList.forEach(job => {
         const card = document.createElement('div');
         card.className = 'job-card shadow-sm';
+        
         card.innerHTML = `
             <div>
                 <div class="job-meta-row">
@@ -101,9 +114,13 @@ function renderJobs(jobsList) {
                     <span class="job-tag">${job.type || 'Full-Time'}</span>
                 </div>
                 <h3>${job.title}</h3>
-                <p class="job-desc">${job.description || 'Join our high-speed internet team in Tachileik.'}</p>
+                
+                <div class="job-desc-container">
+                    <div class="job-desc-content">${job.description || 'Join our high-speed internet team in Tachileik.'}</div>
+                    <button class="read-more-btn" onclick="toggleJobDesc(this)">Read More <i class="fas fa-chevron-down"></i></button>
+                </div>
             </div>
-            <a href="mailto:smktelecom.tcl@gmail.com?subject=Application%20for%20${encodeURIComponent(job.title)}" class="btn btn-outline-teal" style="width: 100%; margin-top: 1rem;"><i class="fas fa-paper-plane"></i> လျှောက်ထားမည် (Apply)</a>
+            <a href="mailto:smktelecom.tcl@gmail.com?subject=Application%20for%20${encodeURIComponent(job.title)}" class="btn btn-outline-teal" style="width: 100%; margin-top: auto;"><i class="fas fa-paper-plane"></i> လျှောက်ထားမည် (Apply)</a>
         `;
         container.appendChild(card);
     });
@@ -118,7 +135,6 @@ function openOrderModal(planName, planPrice) {
     document.getElementById('modal-plan-name').innerText = planName;
     document.getElementById('modal-plan-price').innerText = planPrice;
     
-    // Add the CSS class to trigger the fade-in / scale-up animation
     const modal = document.getElementById('order-modal');
     modal.classList.add('show');
 }
@@ -128,7 +144,6 @@ function closeOrderModal() {
     modal.classList.remove('show');
 }
 
-// Close modal on click outside
 window.onclick = function(event) {
     const modal = document.getElementById('order-modal');
     if (event.target === modal) {
