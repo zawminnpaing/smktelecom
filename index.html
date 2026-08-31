@@ -7,18 +7,15 @@
     <title>SMK High Speed Fiber Internet | Tachileik</title>
     <meta name="description" content="SMK High Speed Fiber Internet Service Provider in Tachileik, Myanmar. အကောင်းဆုံး အရည်အသွေး၊ အကောင်းဆုံး ဝန်ဆောင်မှု။">
 
-    <!-- New Beautiful Fonts: Outfit (English) & Padauk (Myanmar) -->
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Padauk:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Header Navigation -->
-    <nav class="navbar">
+    <nav class="navbar" id="navbar">
         <div class="container nav-container">
             <a href="#hero" class="brand-logo">
-                <!-- Change "smk-logo.jpg" to the actual name of your logo file -->
                 <img src="smk-logo.jpg" alt="SMK Logo" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                 <div class="brand-logo-text" style="display: none;">
                     <span class="logo-smk">SMK</span>
@@ -41,8 +38,10 @@
         </div>
     </nav>
 
-    <!-- Hero Section (Corporate Light Theme) -->
     <header class="hero-section" id="hero">
+        <div class="hero-glow glow-teal"></div>
+        <div class="hero-glow glow-yellow"></div>
+        
         <div class="container hero-grid">
             <div class="hero-text">
                 <div class="hero-badge">
@@ -60,27 +59,25 @@
                 </div>
 
                 <div class="hero-highlights">
-                    <div class="highlight-item"><i class="fas fa-check-circle"></i> ကြိုး ၃၅၀ မီတာ အခမဲ့</div>
-                    <div class="highlight-item"><i class="fas fa-check-circle"></i> စက်ဖိုး & တပ်ဆင်ခ အခမဲ့</div>
-                    <div class="highlight-item"><i class="fas fa-check-circle"></i> ၂၄ နာရီ စောင့်ရှောက်မှု</div>
+                    <div class="highlight-item"><i class="fas fa-check-circle text-teal"></i> ကြိုး ၃၅၀ မီတာ အခမဲ့</div>
+                    <div class="highlight-item"><i class="fas fa-check-circle text-teal"></i> စက်ဖိုး & တပ်ဆင်ခ အခမဲ့</div>
+                    <div class="highlight-item"><i class="fas fa-check-circle text-teal"></i> ၂၄ နာရီ စောင့်ရှောက်မှု</div>
                 </div>
             </div>
 
             <div class="hero-visual">
-                <!-- Free High Quality Graphic Image for Fiber Internet -->
                 <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?q=80&w=800&auto=format&fit=crop" alt="Fiber Optic Internet" class="hero-img">
                 <div class="floating-card">
                     <i class="fas fa-tachometer-alt"></i>
                     <div>
                         <strong>Up to 70 Mbps</strong>
-                        <span>Ultra-Low Latency</span>
+                        <span>Ultra-Low Latency < 5ms</span>
                     </div>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- Promotions Section -->
     <section class="promotions-section section-padding" id="promotions">
         <div class="container">
             <div class="promo-banner">
@@ -94,21 +91,20 @@
                         <div class="promo-badge">PROMO 1</div>
                         <h3>(၃) လစာ ကြိုတင်ပေးသွင်းပါက</h3>
                         <div class="promo-reward"><span>(၁) လစာ အခမဲ့</span> ရရှိမည်</div>
-                        <p class="promo-subtext">Pay 3 Months in Advance & Get 1 Month FREE!</p>
+                        <p class="promo-subtext">Pay 3 Months in Advance & Get 1 Month FREE</p>
                     </div>
 
                     <div class="promo-box highlighted">
                         <div class="promo-badge best-deal">BEST VALUE</div>
                         <h3>(၆) လစာ ကြိုတင်ပေးသွင်းပါက</h3>
                         <div class="promo-reward"><span>(၂) လစာ အခမဲ့</span> ရရှိမည်</div>
-                        <p class="promo-subtext">Pay 6 Months in Advance & Get 2 Months FREE!</p>
+                        <p class="promo-subtext">Pay 6 Months in Advance & Get 2 Months FREE</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Packages Section -->
     <section class="packages-section section-padding" id="packages">
         <div class="container">
             <div class="section-header">
@@ -117,9 +113,9 @@
                 <p>သင့်အိမ်နှင့် လုပ်ငန်းလိုအပ်ချက်အလိုက် သင့်တော်မည့် လစဉ်သုံး အင်တာနက် အစီအစဉ်များ</p>
             </div>
 
-            <div class="package-grid">
-                <!-- 10 Mbps -->
-                <div class="package-card">
+            <h3 class="tier-title">Home Internet Plans</h3>
+            <div class="package-grid home-tier">
+                <div class="package-card light-card">
                     <div class="card-header">
                         <h3>10 <small>Mbps</small></h3>
                         <p class="plan-subtitle">Home Basic</p>
@@ -128,11 +124,10 @@
                         <span class="price-val">600</span>
                         <span class="price-curr">Baht / Month</span>
                     </div>
-                    <button class="btn btn-card-action" onclick="openOrderModal('10 Mbps', '600 Baht')">တပ်ဆင်မည် (Apply)</button>
+                    <button class="btn btn-outline-teal" onclick="openOrderModal('10 Mbps', '600 Baht')">တပ်ဆင်မည် (Apply)</button>
                 </div>
 
-                <!-- 20 Mbps -->
-                <div class="package-card popular-card">
+                <div class="package-card light-card popular-card">
                     <div class="popular-badge">POPULAR</div>
                     <div class="card-header">
                         <h3>20 <small>Mbps</small></h3>
@@ -145,8 +140,7 @@
                     <button class="btn btn-primary" style="width: 100%;" onclick="openOrderModal('20 Mbps', '1,100 Baht')">တပ်ဆင်မည် (Apply)</button>
                 </div>
 
-                <!-- 30 Mbps -->
-                <div class="package-card">
+                <div class="package-card light-card">
                     <div class="card-header">
                         <h3>30 <small>Mbps</small></h3>
                         <p class="plan-subtitle">Family Pro</p>
@@ -155,52 +149,52 @@
                         <span class="price-val">1,600</span>
                         <span class="price-curr">Baht / Month</span>
                     </div>
-                    <button class="btn btn-card-action" onclick="openOrderModal('30 Mbps', '1,600 Baht')">တပ်ဆင်မည် (Apply)</button>
+                    <button class="btn btn-outline-teal" onclick="openOrderModal('30 Mbps', '1,600 Baht')">တပ်ဆင်မည် (Apply)</button>
                 </div>
+            </div>
 
-                <!-- 40 Mbps -->
-                <div class="package-card">
+            <h3 class="tier-title" style="margin-top: 4rem;">Business & Enterprise Plans</h3>
+            <div class="package-grid enterprise-tier">
+                <div class="package-card dark-card">
                     <div class="card-header">
                         <h3>40 <small>Mbps</small></h3>
-                        <p class="plan-subtitle">Business Lite</p>
+                        <p class="plan-subtitle text-yellow">Business Lite</p>
                     </div>
                     <div class="card-price">
-                        <span class="price-val">2,100</span>
+                        <span class="price-val text-white">2,100</span>
                         <span class="price-curr">Baht / Month</span>
                     </div>
-                    <button class="btn btn-card-action" onclick="openOrderModal('40 Mbps', '2,100 Baht')">တပ်ဆင်မည် (Apply)</button>
+                    <button class="btn btn-outline-yellow" onclick="openOrderModal('40 Mbps', '2,100 Baht')">တပ်ဆင်မည် (Apply)</button>
                 </div>
 
-                <!-- 50 Mbps -->
-                <div class="package-card">
+                <div class="package-card dark-card">
                     <div class="card-header">
                         <h3>50 <small>Mbps</small></h3>
-                        <p class="plan-subtitle">Enterprise Plus</p>
+                        <p class="plan-subtitle text-yellow">Enterprise Plus</p>
                     </div>
                     <div class="card-price">
-                        <span class="price-val">4,150</span>
+                        <span class="price-val text-white">4,150</span>
                         <span class="price-curr">Baht / Month</span>
                     </div>
-                    <button class="btn btn-card-action" onclick="openOrderModal('50 Mbps', '4,150 Baht')">တပ်ဆင်မည် (Apply)</button>
+                    <button class="btn btn-outline-yellow" onclick="openOrderModal('50 Mbps', '4,150 Baht')">တပ်ဆင်မည် (Apply)</button>
                 </div>
 
-                <!-- 70 Mbps -->
-                <div class="package-card enterprise-card">
+                <div class="package-card dark-card ultimate-card">
+                    <div class="popular-badge badge-teal">ULTIMATE</div>
                     <div class="card-header">
                         <h3>70 <small>Mbps</small></h3>
-                        <p class="plan-subtitle">Ultimate Enterprise</p>
+                        <p class="plan-subtitle text-teal">Ultimate Enterprise</p>
                     </div>
                     <div class="card-price">
-                        <span class="price-val">5,200</span>
+                        <span class="price-val text-white">5,200</span>
                         <span class="price-curr">Baht / Month</span>
                     </div>
-                    <button class="btn btn-primary" style="width: 100%;" onclick="openOrderModal('70 Mbps', '5,200 Baht')">တပ်ဆင်မည် (Apply)</button>
+                    <button class="btn btn-teal-solid" style="width: 100%;" onclick="openOrderModal('70 Mbps', '5,200 Baht')">တပ်ဆင်မည် (Apply)</button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- NEW: Coverage Map Section -->
     <section class="coverage-section section-padding bg-light" id="coverage">
         <div class="container">
             <div class="section-header">
@@ -209,14 +203,12 @@
                 <p>တာချီလိတ်မြို့နယ်အတွင်း ကျွန်ုပ်တို့၏ အင်တာနက် ကွန်ရက် လွှမ်းခြုံထားမှု</p>
             </div>
             
-            <div class="map-container shadow-card">
-                <!-- Interactive Google Map embedded for Tachileik Region -->
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d118944.97010471206!2d99.80556214502598!3d20.443788730999564!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30d5d1c3a6b2b781%3A0xc39f9976378e9b08!2sTachileik%2C%20Myanmar%20(Burma)!5e0!3m2!1sen!2sus!4v1690000000000!5m2!1sen!2sus" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <div class="map-container shadow-lg">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d118944.3312015257!2d99.80582238426027!3d20.44372251348865!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30d5d1c258d4ceb9%3A0x6b44dd91f7c5e236!2sTachileik%2C%20Myanmar%20(Burma)!5e0!3m2!1sen!2s!4v1700000000000!5m2!1sen!2s" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </div>
     </section>
 
-    <!-- Work With Us (Careers with Google Sheets Database) -->
     <section class="careers-section section-padding" id="careers">
         <div class="container">
             <div class="section-header">
@@ -225,24 +217,19 @@
                 <p>SMK High Speed Fiber Internet (တာချီလိတ်) မိသားစုနှင့်အတူ လက်တွဲလုပ်ကိုင်ရန် ဖိတ်ခေါ်အပ်ပါသည်။</p>
             </div>
 
-            <!-- Google Sheet Dynamic Job Container -->
             <div id="jobs-container" class="jobs-grid">
-                <!-- Skeletons render while PapaParse fetches data -->
-                <div class="job-skeleton"></div>
-                <div class="job-skeleton"></div>
-            </div>
+                </div>
 
-            <div class="general-apply-banner shadow-card">
+            <div class="general-apply-banner shadow-sm">
                 <div>
                     <h3>သင့်နှင့် ကိုက်ညီသော ရာထူး မတွေ့သေးဘူးလား?</h3>
                     <p>သင့်၏ CV Form ကို ကျွန်ုပ်တို့ထံ တိုက်ရိုက် ပေးပို့ထားနိုင်ပါသည်။</p>
                 </div>
-                <a href="mailto:smktelecom.tcl@gmail.com?subject=CV%20Application%20for%20SMK%20Tachileik" class="btn btn-outline"><i class="fas fa-envelope"></i> Send General CV</a>
+                <a href="mailto:smktelecom.tcl@gmail.com?subject=CV%20Application%20for%20SMK%20Tachileik" class="btn btn-outline-teal"><i class="fas fa-envelope"></i> Send General CV</a>
             </div>
         </div>
     </section>
 
-    <!-- Contact & Location Section -->
     <section class="contact-section section-padding bg-light" id="contact">
         <div class="container">
             <div class="section-header">
@@ -252,19 +239,18 @@
             </div>
 
             <div class="contact-grid">
-                <!-- UPDATED Office Location -->
-                <div class="contact-card shadow-card">
+                <div class="contact-card shadow-sm">
                     <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
                     <h3>Office Address</h3>
                     <p class="address-text">
                         ၀ဟ (၄၃၀) ၊ နတ်စင်လမ်း ၊<br>ဆေးခမ်းရပ်ကွက် ၊ တာချီလိတ်မြို့။
                     </p>
-                    <a href="https://maps.app.goo.gl/JicumCLyyhxF1tp2A" target="_blank" class="btn btn-outline" style="margin-top: 15px; width: 100%;">
-                        <i class="fas fa-directions"></i> Get Directions (Google Maps)
+                    <a href="https://maps.google.com/?q=Tachileik" target="_blank" class="btn btn-outline-teal" style="margin-top: 15px; width: 100%;">
+                        <i class="fas fa-directions"></i> Get Directions
                     </a>
                 </div>
 
-                <div class="contact-card shadow-card">
+                <div class="contact-card shadow-sm">
                     <div class="contact-icon"><i class="fas fa-phone-volume"></i></div>
                     <h3>Hotline Phones</h3>
                     <div class="hotline-buttons">
@@ -273,17 +259,16 @@
                     </div>
                 </div>
 
-                <div class="contact-card shadow-card">
+                <div class="contact-card shadow-sm">
                     <div class="contact-icon"><i class="fab fa-facebook-messenger"></i></div>
                     <h3>Online Support</h3>
                     <p>Facebook Page Messenger မှတစ်ဆင့်လည်း အသေးစိတ် အချိန်မရွေး မေးမြန်းစုံစမ်းနိုင်ပါသည်။</p>
-                    <a href="https://facebook.com" target="_blank" class="btn btn-card-action" style="margin-top: 15px; width: 100%;"><i class="fab fa-facebook"></i> Contact Messenger</a>
+                    <a href="https://facebook.com" target="_blank" class="btn btn-teal-solid" style="margin-top: 15px; width: 100%;"><i class="fab fa-facebook"></i> Contact Messenger</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="container footer-content">
             <div class="footer-brand">
@@ -291,25 +276,24 @@
                 <p>SMK High Speed Fiber Internet | Tachileik Region</p>
             </div>
             <div class="footer-copy">
-                <p>&copy; 2026 SHWE MAHAR MAE KHONG Co., Ltd. All rights reserved.</p>
+                <p>© 2026 SHWE MAHAR MAE KHONG Co., Ltd. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
-    <!-- Order & Inquiry Modal (Untouched functionality, updated styles) -->
-    <div class="modal-overlay" id="order-modal" style="display: none;">
+    <div class="modal-overlay" id="order-modal">
         <div class="modal-box">
             <div class="modal-header">
                 <h3>တပ်ဆင်ရန် လျှောက်ထားခြင်း</h3>
-                <button class="modal-close" onclick="closeOrderModal()">&times;</button>
+                <button class="modal-close" onclick="closeOrderModal()"><i class="fas fa-times"></i></button>
             </div>
             <div class="modal-body">
                 <div class="selected-plan-banner">
                     <div>
                         <span style="font-size: 0.8rem; color: var(--text-muted);">Selected Package:</span>
-                        <h4 id="modal-plan-name" style="color: var(--brand-dark); margin: 2px 0;">-</h4>
+                        <h4 id="modal-plan-name" style="color: var(--brand-navy); margin: 2px 0;">-</h4>
                     </div>
-                    <div id="modal-plan-price" style="font-weight: 700; color: var(--brand-teal); font-size: 1.2rem;">-</div>
+                    <div id="modal-plan-price" style="font-weight: 800; color: var(--brand-teal); font-size: 1.2rem;">-</div>
                 </div>
 
                 <form id="order-form" onsubmit="submitOrder(event)">
@@ -331,7 +315,7 @@
                         <div class="modal-btn-row">
                             <button type="button" class="btn btn-telegram" onclick="sendOrderVia('telegram')"><i class="fab fa-telegram-plane"></i> Telegram</button>
                             <button type="button" class="btn btn-viber" onclick="sendOrderVia('viber')"><i class="fab fa-viber"></i> Viber</button>
-                            <button type="button" class="btn btn-call" onclick="sendOrderVia('call')"><i class="fas fa-phone-alt"></i> Call Hotline</button>
+                            <button type="button" class="btn btn-call" onclick="sendOrderVia('call')"><i class="fas fa-phone-alt"></i> Hotline</button>
                         </div>
                     </div>
                 </form>
@@ -339,7 +323,6 @@
         </div>
     </div>
 
-    <!-- PapaParse for Google Sheets Database -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
     <script src="script.js"></script>
 </body>
