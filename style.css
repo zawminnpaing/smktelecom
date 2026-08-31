@@ -19,10 +19,17 @@
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+
+/* FIX 1: Strict Global Width ensures NO horizontal zoom/overflow issues */
+html, body { 
+    scroll-behavior: smooth;
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden; 
+    -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; 
+}
 
 /* ANTI-COPY PROTECTIONS */
-body, html { -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
 input, textarea { -webkit-user-select: auto; -moz-user-select: auto; -ms-user-select: auto; user-select: auto; }
 img { -webkit-user-drag: none; user-drag: none; pointer-events: none; }
 .logo-img, .hero-logo, .promo-poster-img { pointer-events: auto; -webkit-user-drag: none; }
@@ -31,7 +38,6 @@ body {
     font-family: 'Plus Jakarta Sans', 'Noto Sans Myanmar', sans-serif;
     color: var(--text-main);
     line-height: 1.8; 
-    overflow-x: hidden;
     background-color: #f8fafc;
 }
 
@@ -70,21 +76,20 @@ body {
 .btn-teal-solid { background: var(--brand-teal); color: #fff; width: 100%; box-shadow: 0 4px 15px rgba(21, 181, 166, 0.4); }
 .btn-teal-solid:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(21, 181, 166, 0.6); }
 
-/* Premium Shimmer Effect (BUG FIXED: Added overflow & relative) */
+/* FIX 2: Shimmer Overflow and Phantom Click Prevented */
 .shimmer-btn {
     position: relative;
-    overflow: hidden;
+    overflow: hidden; /* CRITICAL: Prevents shimmer from bleeding out */
+    z-index: 1;
 }
 .shimmer-btn::after {
     content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
     background: rgba(255, 255, 255, 0.2); transform: rotate(45deg);
     animation: buttonShimmer 3s infinite cubic-bezier(0.19, 1, 0.22, 1);
-    pointer-events: none; /* Crucial to prevent ghost clicks */
+    pointer-events: none; /* CRITICAL: Stops phantom clicks */
+    z-index: 2;
 }
-@keyframes buttonShimmer {
-    0% { left: -150%; }
-    50%, 100% { left: 150%; }
-}
+@keyframes buttonShimmer { 0% { left: -150%; } 50%, 100% { left: 150%; } }
 
 /* Scroll Reveal Animation */
 .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); }
@@ -126,7 +131,7 @@ body {
 }
 @keyframes floatLogo { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
 
-/* NEW: Horizontal Particles Animation */
+/* Horizontal Particles Animation */
 .particles-container {
     position: absolute; top: 0; left: 0; width: 100%; height: 100%;
     overflow: hidden; z-index: 0; pointer-events: none;
@@ -143,12 +148,7 @@ body {
 .p4 { top: 75%; left: -10px; animation-duration: 14s; background: var(--brand-yellow); box-shadow: 0 0 10px var(--brand-yellow); }
 .p5 { top: 85%; left: -10px; animation-duration: 11s; }
 
-@keyframes drift {
-    0% { transform: translateX(0); opacity: 0; }
-    10% { opacity: 1; }
-    90% { opacity: 1; }
-    100% { transform: translateX(100vw); opacity: 0; }
-}
+@keyframes drift { 0% { transform: translateX(0); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translateX(100vw); opacity: 0; } }
 
 .hero-glow { position: absolute; border-radius: 50%; filter: blur(100px); z-index: 0; pointer-events: none; opacity: 0.6; }
 .glow-teal { width: 400px; height: 400px; background: rgba(21, 181, 166, 0.4); top: -100px; left: -100px; }
@@ -204,8 +204,13 @@ body {
 .promo-poster-img { width: 100%; height: auto; display: block; object-fit: cover; }
 .poster-actions { padding: 1.5rem; display: grid; grid-template-columns: 1fr; gap: 1rem; background: var(--bg-light); border-top: 1px solid var(--border-color);}
 
-/* Packages Grid */
-.tier-title { font-size: 1.5rem; font-weight: 800; color: var(--brand-navy); margin-bottom: 1.5rem; text-align: center; border-bottom: 3px solid var(--brand-teal); display: inline-block; padding-bottom: 0.3rem; left: 50%; position: relative; transform: translateX(-50%); }
+/* FIX 3: Centered, Non-Overflowing Tier Titles */
+.tier-title { 
+    font-size: 1.5rem; font-weight: 800; color: var(--brand-navy); 
+    margin: 0 auto 1.5rem; /* This guarantees perfect centering without breaking width */
+    text-align: center; border-bottom: 3px solid var(--brand-teal); 
+    display: table; padding-bottom: 0.3rem; 
+}
 .package-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
 .package-card { border-radius: 16px; padding: 2.5rem 1.5rem; text-align: center; transition: var(--transition); position: relative; }
 .package-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
@@ -243,7 +248,7 @@ body {
     background: rgba(21, 181, 166, 0.1); padding: 1rem; border-radius: 8px; border: 1px dashed var(--brand-teal);
 }
 
-/* Careers Grid (Modal Version) */
+/* Careers Grid */
 .jobs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; margin-bottom: 2.5rem; }
 .job-card {
     background: #fff; border: 1px solid var(--border-color); border-radius: 12px;
@@ -287,13 +292,14 @@ body {
 .modal-overlay {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(5px); z-index: 2000;
-    display: flex; justify-content: center; align-items: center; padding: 1rem;
+    display: flex; justify-content: center; align-items: center; padding: 1.5rem;
     opacity: 0; visibility: hidden; transition: opacity 0.3s ease; 
+    box-sizing: border-box; /* Fixes boundary issues */
 }
 .modal-overlay.show { opacity: 1; visibility: visible; }
 .modal-box {
-    background: #fff; border-radius: 16px; max-width: 480px; width: 100%;
-    overflow: hidden; box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+    background: #fff; border-radius: 16px; width: 100%; max-width: 480px;
+    overflow: hidden; box-shadow: 0 25px 50px rgba(0,0,0,0.25); margin: 0 auto;
     transform: scale(0.95) translateY(20px); transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
 }
 .modal-overlay.show .modal-box { transform: scale(1) translateY(0); }
@@ -302,7 +308,6 @@ body {
     background: var(--bg-light); padding: 1.2rem 1.5rem; display: flex;
     justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color);
 }
-.modal-header h3 { color: var(--brand-navy); font-size: 1.2rem; font-weight: 800; line-height: 1.5;}
 .modal-close { background: rgba(0,0,0,0.05); border: none; font-size: 1.2rem; color: var(--text-muted); cursor: pointer; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: 0.2s; pointer-events: auto;}
 .modal-close:hover { background: rgba(0,0,0,0.1); color: var(--brand-navy); }
 .modal-body { padding: 1.5rem; }
@@ -314,7 +319,7 @@ body {
 .form-group label { display: block; font-size: 0.95rem; color: var(--brand-navy); font-weight: 700; margin-bottom: 0.4rem; }
 .form-group input, .form-group textarea {
     width: 100%; padding: 0.8rem; background: #fff; border: 1px solid var(--border-color);
-    border-radius: 8px; color: var(--text-main); font-family: inherit; font-size: 0.95rem; outline: none; transition: 0.2s;
+    border-radius: 8px; color: var(--text-main); font-family: inherit; font-size: 0.95rem; outline: none; transition: 0.2s; box-sizing: border-box;
 }
 .form-group input:focus, .form-group textarea:focus { border-color: var(--brand-teal); box-shadow: 0 0 0 3px rgba(21, 181, 166, 0.1); }
 .modal-actions { margin-top: 2rem; border-top: 1px solid var(--border-color); padding-top: 1.5rem; }
@@ -347,13 +352,16 @@ body {
     .nav-menu .nav-link { color: var(--brand-navy); font-size: 1.1rem; }
     
     /* Typography scaled perfectly for mobile */
-    .hero-text h1 { font-size: 2rem; line-height: 1.5; }
+    .hero-text h1 { font-size: 2.2rem; line-height: 1.5; }
     .section-header h2 { font-size: 1.8rem; line-height: 1.5; }
     .card-header h3 { font-size: 2.5rem; }
     .price-val { font-size: 2.2rem; }
-    .promo-box { padding-top: 3.5rem; } /* Gives badge more room */
+    .promo-box { padding-top: 3.5rem; } 
 
     .footer-content { justify-content: center; text-align: center; }
+    
+    /* Modal Mobile Fixes */
+    .modal-overlay { padding: 1rem; }
     .modal-btn-row { grid-template-columns: 1fr; } 
-    .poster-actions { grid-template-columns: 1fr; } 
+    .btn { white-space: normal; text-align: center; } /* Prevents text overflow */
 }
