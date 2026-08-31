@@ -7,6 +7,9 @@
     <title>SMK High Speed Fiber Internet | Tachileik</title>
     <meta name="description" content="SMK High Speed Fiber Internet Service Provider in Tachileik, Myanmar. အကောင်းဆုံး အရည်အသွေး၊ အကောင်းဆုံး ဝန်ဆောင်မှု။">
 
+    <!-- NEW: Browser Tab Icon (Favicon) -->
+    <link id="dynamic-favicon" rel="icon" type="image/jpeg" href="smk-logo.jpg">
+
     <!-- Premium Tech Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Myanmar:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -251,7 +254,7 @@
         </div>
     </section>
 
-    <!-- Contact Section (No Embedded Map - Clean Grid) -->
+    <!-- Contact Section -->
     <section class="contact-section section-padding bg-light-grad" id="contact">
         <div class="container">
             <div class="section-header">
@@ -260,33 +263,40 @@
                 <p>တာချီလိတ်မြို့တွင်း အင်တာနက်တပ်ဆင်လိုပါက အောက်ပါ လိပ်စာနှင့် ဖုန်းနံပါတ်များသို့ ဆက်သွယ်နိုင်ပါသည်</p>
             </div>
 
-            <div class="contact-grid">
-                <!-- Clickable Address Card opens Native Google Maps -->
-                <div class="contact-card shadow-sm map-card" onclick="window.open('https://maps.app.goo.gl/JicumCLyyhxF1tp2A', '_blank')">
-                    <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
-                    <h3>Office Address</h3>
-                    <p class="address-text">
-                        ဝဟ (၄၃၀) ၊ နတ်စင်လမ်း ၊<br>ဆေးခမ်းရပ်ကွက် ၊ တာချီလိတ်မြို့။
-                    </p>
-                    <button class="btn btn-outline-teal" style="margin-top: 15px; width: 100%;">
-                        <i class="fas fa-location-arrow"></i> Open in Maps
-                    </button>
-                </div>
+            <div class="contact-layout">
+                <div class="contact-grid-compact">
+                    <div class="contact-card shadow-sm map-card" onclick="window.open('https://maps.app.goo.gl/JicumCLyyhxF1tp2A', '_blank')">
+                        <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <h3>Office Address</h3>
+                        <p class="address-text">
+                            ဝဟ (၄၃၀) ၊ နတ်စင်လမ်း ၊<br>ဆေးခမ်းရပ်ကွက် ၊ တာချီလိတ်မြို့။
+                        </p>
+                        <button class="btn btn-outline-teal" style="margin-top: 15px; width: 100%;">
+                            <i class="fas fa-location-arrow"></i> Open in Maps
+                        </button>
+                    </div>
 
-                <div class="contact-card shadow-sm">
-                    <div class="contact-icon"><i class="fas fa-phone-volume"></i></div>
-                    <h3>Hotline Phones</h3>
-                    <div class="hotline-buttons">
-                        <a href="tel:09690607777" class="hotline-link"><i class="fas fa-phone"></i> 09 690 607 777</a>
-                        <a href="tel:09690467777" class="hotline-link"><i class="fas fa-phone"></i> 09 690 467 777</a>
+                    <div class="contact-card shadow-sm">
+                        <div class="contact-icon"><i class="fas fa-phone-volume"></i></div>
+                        <h3>Hotline Phones</h3>
+                        <div class="hotline-buttons">
+                            <a href="tel:09690607777" class="hotline-link"><i class="fas fa-phone"></i> 09 690 607 777</a>
+                            <a href="tel:09690467777" class="hotline-link"><i class="fas fa-phone"></i> 09 690 467 777</a>
+                        </div>
+                    </div>
+
+                    <div class="contact-card shadow-sm">
+                        <div class="contact-icon"><i class="fab fa-facebook-messenger"></i></div>
+                        <h3>Online Support</h3>
+                        <p>Facebook Page Messenger မှတစ်ဆင့်လည်း အသေးစိတ် အချိန်မရွေး မေးမြန်းစုံစမ်းနိုင်ပါသည်။</p>
+                        <a href="https://facebook.com" target="_blank" class="btn btn-teal-solid" style="margin-top: 15px; width: 100%;"><i class="fab fa-facebook"></i> Contact Messenger</a>
                     </div>
                 </div>
 
-                <div class="contact-card shadow-sm">
-                    <div class="contact-icon"><i class="fab fa-facebook-messenger"></i></div>
-                    <h3>Online Support</h3>
-                    <p>Facebook Page Messenger မှတစ်ဆင့်လည်း အသေးစိတ် အချိန်မရွေး မေးမြန်းစုံစမ်းနိုင်ပါသည်။</p>
-                    <a href="https://facebook.com" target="_blank" class="btn btn-teal-solid" style="margin-top: 15px; width: 100%;"><i class="fab fa-facebook"></i> Contact Messenger</a>
+                <div class="office-map-container shadow-md">
+                    <div style="width: 100%; height: 100%;">
+                        <iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" style="border:0; min-height: 400px;" allowfullscreen src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBVizdQeh3udy11xDc5Ao2YStR2gLc-rfc&q=20.467657%2C99.916057&maptype=roadmap&zoom=16"></iframe>
+                    </div>
                 </div>
             </div>
         </div>
@@ -305,7 +315,6 @@
                 <div class="poster-card shadow-md">
                     <img id="dynamic-poster-1" src="" alt="SMK Promo 1" class="promo-poster-img">
                     <div class="poster-actions">
-                        <!-- Only Share Button Remains -->
                         <button class="btn btn-teal-solid" onclick="sharePromoImage(1)"><i class="fas fa-share-alt"></i> မျှဝေမည် (Share)</button>
                     </div>
                 </div>
@@ -333,7 +342,7 @@
         </div>
     </footer>
 
-    <!-- Job Description Modal (NEW) -->
+    <!-- Job Description Modal -->
     <div class="modal-overlay" id="job-modal">
         <div class="modal-box" style="max-width: 600px;">
             <div class="modal-header">
@@ -341,9 +350,7 @@
                 <button class="modal-close" onclick="closeJobModal()"><i class="fas fa-times"></i></button>
             </div>
             <div class="modal-body" style="max-height: 70vh; overflow-y: auto;">
-                <div class="job-meta-row" id="job-modal-meta" style="margin-bottom: 1.5rem;">
-                    <!-- Tags injected here -->
-                </div>
+                <div class="job-meta-row" id="job-modal-meta" style="margin-bottom: 1.5rem;"></div>
                 
                 <div class="form-group">
                     <label><i class="fas fa-briefcase text-teal"></i> Job Description (လုပ်ငန်းတာဝန်များ)</label>
