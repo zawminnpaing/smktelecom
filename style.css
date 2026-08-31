@@ -21,11 +21,11 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 
-/* ANTI-COPY PROTECTIONS (CSS) */
+/* ANTI-COPY PROTECTIONS */
 body, html { -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
 input, textarea { -webkit-user-select: auto; -moz-user-select: auto; -ms-user-select: auto; user-select: auto; }
 img { -webkit-user-drag: none; user-drag: none; pointer-events: none; }
-.logo-img, .promo-poster-img { pointer-events: auto; -webkit-user-drag: none; }
+.logo-img, .hero-logo, .promo-poster-img { pointer-events: auto; -webkit-user-drag: none; }
 
 body {
     font-family: 'Plus Jakarta Sans', 'Noto Sans Myanmar', sans-serif;
@@ -48,12 +48,13 @@ body {
 .text-yellow { color: var(--brand-yellow); }
 .text-white { color: #fff !important; }
 
-/* Buttons */
+/* Buttons & Shimmer Animation */
 .btn {
     display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
     padding: 0.8rem 1.6rem; border-radius: 8px; font-weight: 700; font-size: 0.95rem;
     cursor: pointer; text-decoration: none; transition: var(--transition); border: none;
     font-family: inherit; line-height: 1; white-space: nowrap; pointer-events: auto;
+    position: relative; overflow: hidden;
 }
 .btn-primary { background: var(--brand-yellow); color: var(--brand-navy); box-shadow: 0 4px 15px rgba(252, 190, 45, 0.4); }
 .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(252, 190, 45, 0.6); }
@@ -69,6 +70,21 @@ body {
 
 .btn-teal-solid { background: var(--brand-teal); color: #fff; width: 100%; box-shadow: 0 4px 15px rgba(21, 181, 166, 0.4); }
 .btn-teal-solid:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(21, 181, 166, 0.6); }
+
+/* Premium Shimmer Effect for Call-to-Action Buttons */
+.shimmer-btn::after {
+    content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+    background: rgba(255, 255, 255, 0.2); transform: rotate(45deg);
+    animation: buttonShimmer 3s infinite cubic-bezier(0.19, 1, 0.22, 1);
+}
+@keyframes buttonShimmer {
+    0% { left: -150%; }
+    50%, 100% { left: 150%; }
+}
+
+/* Scroll Reveal Animation */
+.reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); }
+.reveal.active { opacity: 1; transform: translateY(0); }
 
 /* Solid White Navbar */
 .navbar {
@@ -95,9 +111,40 @@ body {
 
 /* Deep Navy Tech Hero Section */
 .hero-section {
-    padding: 10rem 0 6rem; /* Extra top padding due to solid white navbar */
+    padding: 10rem 0 6rem; 
     background: var(--brand-navy); position: relative; overflow: hidden;
 }
+
+/* Hero Logo */
+.hero-logo {
+    max-width: 140px; margin-bottom: 1.5rem; display: block;
+    filter: drop-shadow(0 4px 10px rgba(0,0,0,0.3));
+    animation: floatLogo 4s ease-in-out infinite;
+}
+@keyframes floatLogo { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+
+/* Lightning / Fiber Optic Animation */
+.fiber-container {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    overflow: hidden; z-index: 0; pointer-events: none; opacity: 0.5;
+}
+.fiber-streak {
+    position: absolute; height: 2px; width: 200px; opacity: 0;
+    background: linear-gradient(90deg, transparent, var(--brand-teal), #fff, transparent);
+    animation: shootData 4s infinite linear;
+}
+.fiber-streak:nth-child(1) { top: 20%; left: -200px; animation-delay: 0s; }
+.fiber-streak:nth-child(2) { top: 45%; left: -200px; animation-delay: 1.5s; width: 300px; background: linear-gradient(90deg, transparent, var(--brand-yellow), #fff, transparent); }
+.fiber-streak:nth-child(3) { top: 75%; left: -200px; animation-delay: 0.8s; }
+.fiber-streak:nth-child(4) { top: 85%; left: -200px; animation-delay: 2.5s; width: 150px; }
+
+@keyframes shootData {
+    0% { transform: translateX(0); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translateX(120vw); opacity: 0; }
+}
+
 .hero-glow { position: absolute; border-radius: 50%; filter: blur(100px); z-index: 0; pointer-events: none; opacity: 0.6; }
 .glow-teal { width: 400px; height: 400px; background: rgba(21, 181, 166, 0.4); top: -100px; left: -100px; }
 .glow-yellow { width: 500px; height: 500px; background: rgba(252, 190, 45, 0.2); bottom: -150px; right: -150px; }
@@ -213,7 +260,7 @@ body {
 /* Contact Grid (No Map) */
 .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
 .contact-card { background: #fff; border: 1px solid var(--border-color); border-radius: 14px; padding: 2.5rem 2rem; text-align: center; transition: var(--transition); }
-.map-card:hover { border-color: var(--brand-teal); box-shadow: var(--shadow-md); cursor: pointer;} /* Interactive Map Card */
+.map-card:hover { border-color: var(--brand-teal); box-shadow: var(--shadow-md); cursor: pointer;}
 .contact-icon { font-size: 2.2rem; color: var(--brand-yellow); margin-bottom: 1.2rem; }
 .contact-card h3 { font-size: 1.2rem; margin-bottom: 0.8rem; color: var(--brand-navy); font-weight: 800; line-height: 1.6;}
 .address-text { font-size: 1rem; color: var(--text-muted); line-height: 1.8; font-weight: 500;}
@@ -231,7 +278,7 @@ body {
 .footer-brand p { color: #94a3b8; font-size: 0.9rem; font-weight: 500;}
 .footer-copy { color: #64748b; font-size: 0.85rem; font-weight: 500;}
 
-/* Smooth Animated Modals (Both Checkout & Job Modal) */
+/* Smooth Animated Modals */
 .modal-overlay {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(5px); z-index: 2000;
@@ -281,6 +328,7 @@ body {
     .hero-actions { justify-content: center; }
     .hero-highlights { justify-content: center; }
     .floating-card { display: none; }
+    .hero-logo { margin: 0 auto 1.5rem; } /* Center logo on mobile */
 }
 
 @media (max-width: 768px) {
@@ -295,4 +343,5 @@ body {
     .hero-text h1 { font-size: 2.2rem; }
     .footer-content { justify-content: center; text-align: center; }
     .modal-btn-row { grid-template-columns: 1fr; } 
+    .poster-actions { grid-template-columns: 1fr; } 
 }
