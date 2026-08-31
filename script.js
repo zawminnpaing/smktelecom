@@ -43,7 +43,28 @@ const defaultJobs = [
 let globalJobs = []; 
 let selectedPlanData = { name: "", price: "" };
 
-document.addEventListener('DOMContentLoaded', () => { fetchCareersData(); });
+document.addEventListener('DOMContentLoaded', () => { 
+    fetchCareersData(); 
+    initScrollReveal(); // Initialize fade-in animations
+});
+
+// ==========================================
+// PREMIUM SCROLL REVEAL ANIMATIONS
+// ==========================================
+function initScrollReveal() {
+    const reveals = document.querySelectorAll('.reveal');
+    const revealOptions = { threshold: 0.15, rootMargin: "0px 0px -50px 0px" };
+
+    const revealOnScroll = new IntersectionObserver(function(entries, observer) {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add('active');
+            observer.unobserve(entry.target); // Reveal only once
+        });
+    }, revealOptions);
+
+    reveals.forEach(reveal => { revealOnScroll.observe(reveal); });
+}
 
 // ==========================================
 // FETCH GOOGLE SHEETS DATA
@@ -60,16 +81,21 @@ function fetchCareersData() {
                 if (results.data && results.data.length > 0) {
                     const firstRow = results.data[0];
                     
-                    // Logo & Tab Favicon Update
+                    // Logo Update (Navbar, Hero, and Favicon)
                     if (firstRow.logo_url && firstRow.logo_url.trim() !== "") {
-                        const logoImg = document.getElementById('dynamic-logo');
-                        logoImg.src = firstRow.logo_url;
-                        logoImg.style.display = "block";
+                        // Navbar
+                        const navLogo = document.getElementById('dynamic-logo');
+                        navLogo.src = firstRow.logo_url;
+                        navLogo.style.display = "block";
                         document.getElementById('fallback-logo-text').style.display = "none";
                         
-                        // Dynamically update Browser Tab Icon (Favicon)
-                        const favicon = document.getElementById('dynamic-favicon');
-                        if (favicon) { favicon.href = firstRow.logo_url; }
+                        // Hero Section
+                        const heroLogo = document.getElementById('dynamic-hero-logo');
+                        heroLogo.src = firstRow.logo_url;
+                        heroLogo.style.display = "block";
+                        
+                        // Tab Bar Favicon
+                        document.getElementById('dynamic-favicon').href = firstRow.logo_url;
                     }
                     if (firstRow.poster_1_url && firstRow.poster_1_url.trim() !== "") {
                         poster1Link = firstRow.poster_1_url;
@@ -115,19 +141,33 @@ function sharePromoImage(posterNumber) {
     }
 }
 
-window.toggleJobDesc = function(btnElement) {
-    const descContent = btnElement.previousElementSibling;
-    if (descContent.classList.contains('expanded')) {
-        descContent.classList.remove('expanded');
-        btnElement.innerHTML = 'Read More <i class="fas fa-chevron-down"></i>';
-    } else {
-        descContent.classList.add('expanded');
-        btnElement.innerHTML = 'Show Less <i class="fas fa-chevron-up"></i>';
-    }
-};
+// ==========================================
+// JOB MODAL LOGIC
+// ==========================================
+function openJobModal(jobIndex) {
+    const job = globalJobs[jobIndex];
+    if (!job) return;
+
+    document.getElementById('job-modal-title').innerText = job.title;
+    
+    document.getElementById('job-modal-meta').innerHTML = `
+        <span class="job-tag location"><i class="fas fa-map-marker-alt"></i> ${job.location || 'Tachileik'}</span>
+        <span class="job-tag">${job.department || 'General'}</span>
+        <span class="job-tag">${job.type || 'Full-Time'}</span>
+    `;
+
+    document.getElementById('job-modal-desc').innerHTML = job.description || 'N/A';
+    document.getElementById('job-modal-req').innerHTML = job.requirements || 'N/A';
+    
+    document.getElementById('job-modal-apply').href = `mailto:smktelecom.tcl@gmail.com?subject=Application%20for%20${encodeURIComponent(job.title)}`;
+
+    document.getElementById('job-modal').classList.add('show');
+}
+
+function closeJobModal() { document.getElementById('job-modal').classList.remove('show'); }
 
 // ==========================================
-// RENDER JOBS CARDS & OPEN JOB MODAL
+// RENDER JOBS CARDS 
 // ==========================================
 function renderJobs(jobsList) {
     const container = document.getElementById('jobs-container');
@@ -148,36 +188,13 @@ function renderJobs(jobsList) {
                 <h3>${job.title}</h3>
                 <p class="job-desc">${shortDesc}</p>
                 
-                <button class="btn btn-outline-teal" style="width: 100%; margin-top: auto;" onclick="openJobModal(${index})">
+                <button class="btn btn-outline-teal shimmer-btn" style="width: 100%; margin-top: auto;" onclick="openJobModal(${index})">
                     အသေးစိတ်ကြည့်ရန် (View Details)
                 </button>
             </div>
         `;
         container.appendChild(card);
     });
-}
-
-function openJobModal(jobIndex) {
-    const job = globalJobs[jobIndex];
-    if (!job) return;
-
-    document.getElementById('job-modal-title').innerText = job.title;
-    
-    document.getElementById('job-modal-meta').innerHTML = `
-        <span class="job-tag location"><i class="fas fa-map-marker-alt"></i> ${job.location || 'Tachileik'}</span>
-        <span class="job-tag">${job.department || 'General'}</span>
-        <span class="job-tag">${job.type || 'Full-Time'}</span>
-    `;
-
-    document.getElementById('job-modal-desc').innerHTML = job.description || 'N/A';
-    document.getElementById('job-modal-req').innerHTML = job.requirements || 'N/A';
-    
-    document.getElementById('job-modal-apply').href = `mailto:smktelecom.tcl@gmail.com?subject=Application%20for%20${encodeURIComponent(job.title)}`;
-    document.getElementById('job-modal').classList.add('show');
-}
-
-function closeJobModal() {
-    document.getElementById('job-modal').classList.remove('show');
 }
 
 // ==========================================
@@ -204,19 +221,13 @@ function sendOrderVia(platform) {
     const phone = document.getElementById('order-phone').value.trim();
     const address = document.getElementById('order-address').value.trim();
 
-    if (!name || !phone || !address) {
-        alert("ကျေးဇူးပြု၍ အမည်၊ ဖုန်းနံပါတ်နှင့် လိပ်စာ အချက်အလက်များကို ပြည့်စုံစွာ ဖြည့်ပေးပါ။"); return;
-    }
-
+    if (!name || !phone || !address) { alert("ကျေးဇူးပြု၍ အမည်၊ ဖုန်းနံပါတ်နှင့် လိပ်စာ အချက်အလက်များကို ပြည့်စုံစွာ ဖြည့်ပေးပါ။"); return; }
     if (platform === 'call') { window.location.href = `tel:09690607777`; return; }
 
     alert("🔒 DEMO VERSION: In the live version, this will instantly forward the customer's order to your official Viber or Telegram.");
     return;
 }
 
-// ==========================================
-// MOBILE MENU
-// ==========================================
 function toggleMobileMenu() { document.getElementById('nav-menu').classList.toggle('active'); }
 function closeMobileMenu() { 
     const menu = document.getElementById('nav-menu');
