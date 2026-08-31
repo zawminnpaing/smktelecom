@@ -45,7 +45,7 @@ let selectedPlanData = { name: "", price: "" };
 
 document.addEventListener('DOMContentLoaded', () => { 
     fetchCareersData(); 
-    initScrollReveal(); // Initialize fade-in animations
+    initScrollReveal(); 
 });
 
 // ==========================================
@@ -59,7 +59,7 @@ function initScrollReveal() {
         entries.forEach(entry => {
             if (!entry.isIntersecting) return;
             entry.target.classList.add('active');
-            observer.unobserve(entry.target); // Reveal only once
+            observer.unobserve(entry.target); 
         });
     }, revealOptions);
 
@@ -81,20 +81,16 @@ function fetchCareersData() {
                 if (results.data && results.data.length > 0) {
                     const firstRow = results.data[0];
                     
-                    // Logo Update (Navbar, Hero, and Favicon)
                     if (firstRow.logo_url && firstRow.logo_url.trim() !== "") {
-                        // Navbar
                         const navLogo = document.getElementById('dynamic-logo');
                         navLogo.src = firstRow.logo_url;
                         navLogo.style.display = "block";
                         document.getElementById('fallback-logo-text').style.display = "none";
                         
-                        // Hero Section
                         const heroLogo = document.getElementById('dynamic-hero-logo');
                         heroLogo.src = firstRow.logo_url;
                         heroLogo.style.display = "block";
                         
-                        // Tab Bar Favicon
                         document.getElementById('dynamic-favicon').href = firstRow.logo_url;
                     }
                     if (firstRow.poster_1_url && firstRow.poster_1_url.trim() !== "") {
@@ -167,7 +163,7 @@ function openJobModal(jobIndex) {
 function closeJobModal() { document.getElementById('job-modal').classList.remove('show'); }
 
 // ==========================================
-// RENDER JOBS CARDS 
+// RENDER JOBS CARDS
 // ==========================================
 function renderJobs(jobsList) {
     const container = document.getElementById('jobs-container');
