@@ -1,4 +1,51 @@
 // ==========================================
+// ANTI-INSPECT: DEVTOOLS DEBUGGER TRAP
+// ==========================================
+(function() {
+    function blockDevTools() {
+        setInterval(function() {
+            (function() {
+                return false;
+            }
+            ['constructor']('debugger')
+            ['call']());
+        }, 50);
+    }
+    try {
+        blockDevTools();
+    } catch (err) {}
+})();
+
+// ==========================================
+// ANTI-INSPECT: SHORTCUT & RIGHT-CLICK BLOCKER
+// ==========================================
+document.addEventListener('contextmenu', (e) => e.preventDefault());
+
+document.addEventListener('keydown', (e) => {
+    // Block F12
+    if (e.key === 'F12' || e.keyCode === 123) {
+        e.preventDefault();
+        return false;
+    }
+    // Block Ctrl+U (View Source)
+    if ((e.ctrlKey || e.metaKey) && (e.key === 'u' || e.key === 'U' || e.keyCode === 85)) {
+        e.preventDefault();
+        return false;
+    }
+    // Block Ctrl+Shift+I / J / C
+    if ((e.ctrlKey || e.metaKey) && e.shiftKey && 
+        ['I', 'i', 'J', 'j', 'C', 'c'].includes(e.key)) {
+        e.preventDefault();
+        return false;
+    }
+    // Block Ctrl+S (Save Page)
+    if ((e.ctrlKey || e.metaKey) && (e.key === 's' || e.key === 'S' || e.keyCode === 83)) {
+        e.preventDefault();
+        return false;
+    }
+});
+
+// ==========================================
 // CONFIGURATION & STORE DATA
 // ==========================================
 
@@ -165,6 +212,13 @@ function sendOrderVia(platform) {
         window.location.href = `tel:09690607777`;
         return;
     }
+
+    // ==========================================
+    // DEMO MODE: BREAK THE CHECKOUT
+    // ==========================================
+    alert("🔒 DEMO VERSION: In the live version, this will instantly forward the customer's order to your official Viber or Telegram.");
+    return;
+    // ==========================================
 
     const message = `🌐 [SMK FIBER INTERNET - TACHILEIK]\n\nအင်တာနက်တပ်ဆင်လိုပါသည် -\n📦 PACKAGE: ${selectedPlanData.name} (${selectedPlanData.price})\n\n👤 CUSTOMER DETAILS:\nအမည်: ${name}\nဖုန်း: ${phone}\nလိပ်စာ: ${address}\n\n(တည်နေရာနှင့် အသေးစိတ်ကို ဆက်သွယ်ပေးပို့ပါမည်။)`;
     const encodedMessage = encodeURIComponent(message);
