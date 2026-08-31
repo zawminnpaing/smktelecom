@@ -48,13 +48,12 @@ body {
 .text-yellow { color: var(--brand-yellow); }
 .text-white { color: #fff !important; }
 
-/* Buttons & Shimmer Animation */
+/* Buttons */
 .btn {
     display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
     padding: 0.8rem 1.6rem; border-radius: 8px; font-weight: 700; font-size: 0.95rem;
     cursor: pointer; text-decoration: none; transition: var(--transition); border: none;
     font-family: inherit; line-height: 1; white-space: nowrap; pointer-events: auto;
-    position: relative; overflow: hidden;
 }
 .btn-primary { background: var(--brand-yellow); color: var(--brand-navy); box-shadow: 0 4px 15px rgba(252, 190, 45, 0.4); }
 .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(252, 190, 45, 0.6); }
@@ -71,11 +70,16 @@ body {
 .btn-teal-solid { background: var(--brand-teal); color: #fff; width: 100%; box-shadow: 0 4px 15px rgba(21, 181, 166, 0.4); }
 .btn-teal-solid:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(21, 181, 166, 0.6); }
 
-/* Premium Shimmer Effect for Call-to-Action Buttons */
+/* Premium Shimmer Effect (BUG FIXED: Added overflow & relative) */
+.shimmer-btn {
+    position: relative;
+    overflow: hidden;
+}
 .shimmer-btn::after {
     content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
     background: rgba(255, 255, 255, 0.2); transform: rotate(45deg);
     animation: buttonShimmer 3s infinite cubic-bezier(0.19, 1, 0.22, 1);
+    pointer-events: none; /* Crucial to prevent ghost clicks */
 }
 @keyframes buttonShimmer {
     0% { left: -150%; }
@@ -89,13 +93,12 @@ body {
 /* Solid White Navbar */
 .navbar {
     position: fixed; top: 0; width: 100%; z-index: 1000; padding: 0.8rem 0;
-    background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(10px);
+    background: #ffffff;
     box-shadow: var(--shadow-sm); border-bottom: 1px solid var(--border-color);
 }
 .nav-container { display: flex; justify-content: space-between; align-items: center; }
 .brand-logo { text-decoration: none; display: flex; align-items: center; gap: 0.8rem; pointer-events: auto; }
 .logo-img { height: 45px; width: auto; object-fit: contain; }
-
 .logo-smk { font-size: 1.8rem; font-weight: 800; color: var(--brand-navy); letter-spacing: 1px; }
 
 .nav-menu { display: flex; align-items: center; gap: 1.5rem; }
@@ -123,26 +126,28 @@ body {
 }
 @keyframes floatLogo { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
 
-/* Lightning / Fiber Optic Animation */
-.fiber-container {
+/* NEW: Horizontal Particles Animation */
+.particles-container {
     position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    overflow: hidden; z-index: 0; pointer-events: none; opacity: 0.5;
+    overflow: hidden; z-index: 0; pointer-events: none;
 }
-.fiber-streak {
-    position: absolute; height: 2px; width: 200px; opacity: 0;
-    background: linear-gradient(90deg, transparent, var(--brand-teal), #fff, transparent);
-    animation: shootData 4s infinite linear;
+.particle {
+    position: absolute; width: 4px; height: 4px; border-radius: 50%;
+    background: var(--brand-teal);
+    box-shadow: 0 0 10px var(--brand-teal), 0 0 20px var(--brand-teal);
+    animation: drift 10s linear infinite; opacity: 0;
 }
-.fiber-streak:nth-child(1) { top: 20%; left: -200px; animation-delay: 0s; }
-.fiber-streak:nth-child(2) { top: 45%; left: -200px; animation-delay: 1.5s; width: 300px; background: linear-gradient(90deg, transparent, var(--brand-yellow), #fff, transparent); }
-.fiber-streak:nth-child(3) { top: 75%; left: -200px; animation-delay: 0.8s; }
-.fiber-streak:nth-child(4) { top: 85%; left: -200px; animation-delay: 2.5s; width: 150px; }
+.p1 { top: 20%; left: -10px; animation-duration: 8s; }
+.p2 { top: 45%; left: -10px; animation-duration: 12s; background: var(--brand-yellow); box-shadow: 0 0 10px var(--brand-yellow); }
+.p3 { top: 60%; left: -10px; animation-duration: 9s; }
+.p4 { top: 75%; left: -10px; animation-duration: 14s; background: var(--brand-yellow); box-shadow: 0 0 10px var(--brand-yellow); }
+.p5 { top: 85%; left: -10px; animation-duration: 11s; }
 
-@keyframes shootData {
+@keyframes drift {
     0% { transform: translateX(0); opacity: 0; }
     10% { opacity: 1; }
     90% { opacity: 1; }
-    100% { transform: translateX(120vw); opacity: 0; }
+    100% { transform: translateX(100vw); opacity: 0; }
 }
 
 .hero-glow { position: absolute; border-radius: 50%; filter: blur(100px); z-index: 0; pointer-events: none; opacity: 0.6; }
@@ -155,7 +160,7 @@ body {
     border: 1px solid rgba(21, 181, 166, 0.3); color: var(--brand-teal); font-size: 0.75rem; font-weight: 700;
     padding: 0.4rem 0.8rem; border-radius: 30px; margin-bottom: 1.5rem; letter-spacing: 1px;
 }
-.hero-text h1 { font-size: 3rem; line-height: 1.6; margin-bottom: 0.8rem; color: #fff; font-weight: 800;} 
+.hero-text h1 { font-size: 3rem; line-height: 1.5; margin-bottom: 0.8rem; color: #fff; font-weight: 800;} 
 .hero-slogan { font-size: 1.2rem; color: var(--brand-yellow); font-weight: 700; margin-bottom: 1rem; }
 .hero-desc { color: #94A3B8; font-size: 1.05rem; margin-bottom: 2.5rem; max-width: 500px; }
 .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
@@ -177,15 +182,15 @@ body {
 /* Section Headers */
 .section-header { text-align: center; max-width: 650px; margin: 0 auto 3.5rem; }
 .section-tag { color: var(--brand-teal); font-size: 0.9rem; font-weight: 800; letter-spacing: 2px; display: block; margin-bottom: 0.5rem; }
-.section-header h2 { font-size: 2.2rem; margin-bottom: 0.8rem; color: var(--brand-navy); line-height: 1.6; font-weight: 800;} 
+.section-header h2 { font-size: 2.2rem; margin-bottom: 0.8rem; color: var(--brand-navy); line-height: 1.5; font-weight: 800;} 
 .section-header p { color: var(--text-muted); font-size: 1.05rem; }
 
 /* Promotions Banner */
 .promo-banner { background: var(--brand-navy); border-radius: 20px; padding: 3rem; text-align: center; color: #fff; box-shadow: var(--shadow-lg); position: relative; overflow: hidden; }
-.promo-header h2 { font-size: 2rem; margin-bottom: 0.5rem; color: #fff; font-weight: 800; line-height: 1.6;}
+.promo-header h2 { font-size: 2rem; margin-bottom: 0.5rem; color: #fff; font-weight: 800; line-height: 1.5;}
 .promo-header p { color: #cbd5e1; margin-bottom: 2rem; }
 .promo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
-.promo-box { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 2.5rem 2rem; text-align: center; position: relative; }
+.promo-box { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 2.8rem 2rem 2rem; text-align: center; position: relative; }
 .promo-box.highlighted { border-color: var(--brand-yellow); background: rgba(252, 190, 45, 0.08); }
 .promo-badge { position: absolute; top: 12px; left: 12px; background: rgba(255,255,255,0.2); font-size: 0.7rem; padding: 0.3rem 0.6rem; border-radius: 4px; letter-spacing: 1px; font-weight: 700;}
 .best-deal { background: var(--brand-yellow); color: var(--brand-navy); font-weight: 800; }
@@ -222,7 +227,7 @@ body {
 .popular-badge {
     position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
     background: var(--brand-yellow); color: var(--brand-navy); font-size: 0.75rem; font-weight: 800;
-    letter-spacing: 1px; padding: 0.4rem 1.2rem; border-radius: 20px; box-shadow: var(--shadow-sm);
+    letter-spacing: 1px; padding: 0.4rem 1.2rem; border-radius: 20px; box-shadow: var(--shadow-sm); z-index: 2;
 }
 .badge-teal { background: var(--brand-teal); color: #fff; }
 .card-header h3 { font-size: 3rem; line-height: 1; margin-bottom: 0.3rem; }
@@ -297,7 +302,7 @@ body {
     background: var(--bg-light); padding: 1.2rem 1.5rem; display: flex;
     justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color);
 }
-.modal-header h3 { color: var(--brand-navy); font-size: 1.2rem; font-weight: 800; line-height: 1.6;}
+.modal-header h3 { color: var(--brand-navy); font-size: 1.2rem; font-weight: 800; line-height: 1.5;}
 .modal-close { background: rgba(0,0,0,0.05); border: none; font-size: 1.2rem; color: var(--text-muted); cursor: pointer; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: 0.2s; pointer-events: auto;}
 .modal-close:hover { background: rgba(0,0,0,0.1); color: var(--brand-navy); }
 .modal-body { padding: 1.5rem; }
@@ -321,14 +326,14 @@ body {
 .btn-call { background: var(--brand-yellow); color: var(--brand-navy); font-size: 0.85rem; pointer-events: auto;}
 .btn-call:hover { background: #eab308; }
 
-/* Responsive Mobile Rules */
+/* Responsive Mobile Typography Fixes */
 @media (max-width: 900px) {
     .hero-grid { grid-template-columns: 1fr; text-align: center; }
     .hero-desc { margin: 0 auto 2rem; }
     .hero-actions { justify-content: center; }
     .hero-highlights { justify-content: center; }
     .floating-card { display: none; }
-    .hero-logo { margin: 0 auto 1.5rem; } /* Center logo on mobile */
+    .hero-logo { margin: 0 auto 1.5rem; } 
 }
 
 @media (max-width: 768px) {
@@ -340,7 +345,14 @@ body {
     }
     .nav-menu.active { left: 0; }
     .nav-menu .nav-link { color: var(--brand-navy); font-size: 1.1rem; }
-    .hero-text h1 { font-size: 2.2rem; }
+    
+    /* Typography scaled perfectly for mobile */
+    .hero-text h1 { font-size: 2rem; line-height: 1.5; }
+    .section-header h2 { font-size: 1.8rem; line-height: 1.5; }
+    .card-header h3 { font-size: 2.5rem; }
+    .price-val { font-size: 2.2rem; }
+    .promo-box { padding-top: 3.5rem; } /* Gives badge more room */
+
     .footer-content { justify-content: center; text-align: center; }
     .modal-btn-row { grid-template-columns: 1fr; } 
     .poster-actions { grid-template-columns: 1fr; } 
