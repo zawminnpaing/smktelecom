@@ -32,7 +32,6 @@ const STORE_PHONE = "959690607777";
 let poster1Link = "";
 let poster2Link = "";
 
-// Added "requirements" to default fallback jobs to prevent undefined errors
 const defaultJobs = [
     {
         id: "JOB-01", title: "Field Optical Fiber Technician", department: "Operations & Maintenance", location: "Tachileik (တာချီလိတ်)", type: "Full-Time",
@@ -60,11 +59,17 @@ function fetchCareersData() {
             complete: function(results) {
                 if (results.data && results.data.length > 0) {
                     const firstRow = results.data[0];
+                    
+                    // Logo & Tab Favicon Update
                     if (firstRow.logo_url && firstRow.logo_url.trim() !== "") {
                         const logoImg = document.getElementById('dynamic-logo');
                         logoImg.src = firstRow.logo_url;
                         logoImg.style.display = "block";
                         document.getElementById('fallback-logo-text').style.display = "none";
+                        
+                        // Dynamically update Browser Tab Icon (Favicon)
+                        const favicon = document.getElementById('dynamic-favicon');
+                        if (favicon) { favicon.href = firstRow.logo_url; }
                     }
                     if (firstRow.poster_1_url && firstRow.poster_1_url.trim() !== "") {
                         poster1Link = firstRow.poster_1_url;
@@ -78,8 +83,6 @@ function fetchCareersData() {
                     }
                 }
                 const liveJobs = results.data.filter(row => row.title && row.title.trim() !== '');
-                
-                // Save fetched jobs globally so the modal can access them
                 globalJobs = liveJobs.length > 0 ? liveJobs : defaultJobs;
                 renderJobs(globalJobs);
             },
@@ -112,37 +115,19 @@ function sharePromoImage(posterNumber) {
     }
 }
 
-// ==========================================
-// NEW: JOB MODAL LOGIC
-// ==========================================
-function openJobModal(jobIndex) {
-    const job = globalJobs[jobIndex];
-    if (!job) return;
-
-    document.getElementById('job-modal-title').innerText = job.title;
-    
-    // Inject Tags
-    document.getElementById('job-modal-meta').innerHTML = `
-        <span class="job-tag location"><i class="fas fa-map-marker-alt"></i> ${job.location || 'Tachileik'}</span>
-        <span class="job-tag">${job.department || 'General'}</span>
-        <span class="job-tag">${job.type || 'Full-Time'}</span>
-    `;
-
-    document.getElementById('job-modal-desc').innerHTML = job.description || 'N/A';
-    document.getElementById('job-modal-req').innerHTML = job.requirements || 'N/A';
-    
-    // Set Apply Button Link dynamically
-    document.getElementById('job-modal-apply').href = `mailto:smktelecom.tcl@gmail.com?subject=Application%20for%20${encodeURIComponent(job.title)}`;
-
-    document.getElementById('job-modal').classList.add('show');
-}
-
-function closeJobModal() {
-    document.getElementById('job-modal').classList.remove('show');
-}
+window.toggleJobDesc = function(btnElement) {
+    const descContent = btnElement.previousElementSibling;
+    if (descContent.classList.contains('expanded')) {
+        descContent.classList.remove('expanded');
+        btnElement.innerHTML = 'Read More <i class="fas fa-chevron-down"></i>';
+    } else {
+        descContent.classList.add('expanded');
+        btnElement.innerHTML = 'Show Less <i class="fas fa-chevron-up"></i>';
+    }
+};
 
 // ==========================================
-// RENDER JOBS CARDS (Clean Grid without Accordion)
+// RENDER JOBS CARDS & OPEN JOB MODAL
 // ==========================================
 function renderJobs(jobsList) {
     const container = document.getElementById('jobs-container');
@@ -151,8 +136,6 @@ function renderJobs(jobsList) {
     jobsList.forEach((job, index) => {
         const card = document.createElement('div');
         card.className = 'job-card shadow-sm';
-        
-        // Truncate description slightly for the preview card to keep grid neat
         const shortDesc = job.description ? job.description.substring(0, 80) + '...' : '...';
 
         card.innerHTML = `
@@ -174,6 +157,29 @@ function renderJobs(jobsList) {
     });
 }
 
+function openJobModal(jobIndex) {
+    const job = globalJobs[jobIndex];
+    if (!job) return;
+
+    document.getElementById('job-modal-title').innerText = job.title;
+    
+    document.getElementById('job-modal-meta').innerHTML = `
+        <span class="job-tag location"><i class="fas fa-map-marker-alt"></i> ${job.location || 'Tachileik'}</span>
+        <span class="job-tag">${job.department || 'General'}</span>
+        <span class="job-tag">${job.type || 'Full-Time'}</span>
+    `;
+
+    document.getElementById('job-modal-desc').innerHTML = job.description || 'N/A';
+    document.getElementById('job-modal-req').innerHTML = job.requirements || 'N/A';
+    
+    document.getElementById('job-modal-apply').href = `mailto:smktelecom.tcl@gmail.com?subject=Application%20for%20${encodeURIComponent(job.title)}`;
+    document.getElementById('job-modal').classList.add('show');
+}
+
+function closeJobModal() {
+    document.getElementById('job-modal').classList.remove('show');
+}
+
 // ==========================================
 // CHECKOUT MODAL LOGIC
 // ==========================================
@@ -186,7 +192,6 @@ function openOrderModal(planName, planPrice) {
 
 function closeOrderModal() { document.getElementById('order-modal').classList.remove('show'); }
 
-// Close either modal if clicked outside
 window.onclick = function(event) {
     const orderModal = document.getElementById('order-modal');
     const jobModal = document.getElementById('job-modal');
