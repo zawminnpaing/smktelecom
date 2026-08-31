@@ -2,10 +2,10 @@
    SMK CORPORATE THEME (Exact Logo Matches)
 ========================================= */
 :root {
-    --brand-teal: #15B5A6;    /* Exact logo teal */
-    --brand-yellow: #FCBE2D;  /* Exact logo yellow */
-    --brand-navy: #0F172A;    /* Deep premium tech navy */
-    --brand-slate: #1E293B;   /* Lighter slate for dark cards */
+    --brand-teal: #15B5A6;    
+    --brand-yellow: #FCBE2D;  
+    --brand-navy: #0F172A;    
+    --brand-slate: #1E293B;   
     
     --text-main: #1E293B;
     --text-muted: #64748B;
@@ -21,11 +21,38 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 
+/* =========================================
+   ANTI-COPY PROTECTIONS (CSS)
+========================================= */
+/* Prevent text highlighting and copying */
+body, html {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+/* Allow typing in checkout input fields and textareas */
+input, textarea {
+    -webkit-user-select: auto;
+    -moz-user-select: auto;
+    -ms-user-select: auto;
+    user-select: auto;
+}
+/* Prevent dragging images onto the desktop */
+img {
+    -webkit-user-drag: none;
+    user-drag: none;
+    pointer-events: none; 
+}
+/* Re-enable pointer events for the hamburger menu if it's an image, or leave for layout */
+.logo-img { pointer-events: auto; -webkit-user-drag: none; }
+
+
 /* Myanmar Premium Typography & Expanded Line Height */
 body {
     font-family: 'Plus Jakarta Sans', 'Noto Sans Myanmar', sans-serif;
     color: var(--text-main);
-    line-height: 1.8; /* CRITICAL FIX: Gives tall Burmese characters room to breathe */
+    line-height: 1.8; 
     overflow-x: hidden;
     background-color: #f8fafc;
 }
@@ -50,21 +77,21 @@ body {
     display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
     padding: 0.8rem 1.6rem; border-radius: 8px; font-weight: 700; font-size: 0.95rem;
     cursor: pointer; text-decoration: none; transition: var(--transition); border: none;
-    font-family: inherit; line-height: 1; white-space: nowrap; /* Prevents awkward button text wrapping */
+    font-family: inherit; line-height: 1; white-space: nowrap; 
 }
-.btn-primary { background: var(--brand-yellow); color: var(--brand-navy); box-shadow: 0 4px 15px rgba(252, 190, 45, 0.4); }
+.btn-primary { background: var(--brand-yellow); color: var(--brand-navy); box-shadow: 0 4px 15px rgba(252, 190, 45, 0.4); pointer-events: auto;}
 .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(252, 190, 45, 0.6); }
 
-.btn-outline { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,0.3); }
+.btn-outline { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,0.3); pointer-events: auto;}
 .btn-outline:hover { background: rgba(255,255,255,0.1); border-color: #fff; }
 
-.btn-outline-teal { background: transparent; color: var(--brand-teal); border: 2px solid var(--brand-teal); width: 100%; }
+.btn-outline-teal { background: transparent; color: var(--brand-teal); border: 2px solid var(--brand-teal); width: 100%; pointer-events: auto;}
 .btn-outline-teal:hover { background: var(--brand-teal); color: #fff; }
 
-.btn-outline-yellow { background: transparent; color: var(--brand-yellow); border: 2px solid var(--brand-yellow); width: 100%; }
+.btn-outline-yellow { background: transparent; color: var(--brand-yellow); border: 2px solid var(--brand-yellow); width: 100%; pointer-events: auto;}
 .btn-outline-yellow:hover { background: var(--brand-yellow); color: var(--brand-navy); }
 
-.btn-teal-solid { background: var(--brand-teal); color: #fff; width: 100%; box-shadow: 0 4px 15px rgba(21, 181, 166, 0.4); }
+.btn-teal-solid { background: var(--brand-teal); color: #fff; width: 100%; box-shadow: 0 4px 15px rgba(21, 181, 166, 0.4); pointer-events: auto;}
 .btn-teal-solid:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(21, 181, 166, 0.6); }
 
 /* Animated Sticky Navbar */
@@ -77,23 +104,23 @@ body {
     box-shadow: var(--shadow-sm); padding: 0.7rem 0; border-bottom: 1px solid var(--border-color);
 }
 .nav-container { display: flex; justify-content: space-between; align-items: center; }
-.brand-logo { text-decoration: none; display: flex; align-items: center; gap: 0.8rem; }
+.brand-logo { text-decoration: none; display: flex; align-items: center; gap: 0.8rem; pointer-events: auto; }
 .logo-img { height: 45px; width: auto; object-fit: contain; }
 
 .logo-smk { font-size: 1.8rem; font-weight: 800; color: var(--brand-navy); letter-spacing: 1px; }
 .navbar:not(.scrolled) .logo-smk { color: #fff; } 
 
 .nav-menu { display: flex; align-items: center; gap: 1.5rem; }
-.nav-link { color: #fff; text-decoration: none; font-size: 0.95rem; font-weight: 600; transition: var(--transition); }
+.nav-link { color: #fff; text-decoration: none; font-size: 0.95rem; font-weight: 600; transition: var(--transition); pointer-events: auto;}
 .navbar.scrolled .nav-link { color: var(--text-muted); }
 .nav-link:hover, .navbar.scrolled .nav-link:hover { color: var(--brand-teal); }
 
 .btn-nav-call {
     background: var(--brand-teal); color: #fff; padding: 0.5rem 1rem;
-    border-radius: 6px; font-weight: 800; font-size: 0.85rem; text-decoration: none; transition: var(--transition);
+    border-radius: 6px; font-weight: 800; font-size: 0.85rem; text-decoration: none; transition: var(--transition); pointer-events: auto;
 }
 .btn-nav-call:hover { background: var(--brand-navy); }
-.hamburger { display: none; font-size: 1.5rem; cursor: pointer; color: #fff; }
+.hamburger { display: none; font-size: 1.5rem; cursor: pointer; color: #fff; pointer-events: auto;}
 .navbar.scrolled .hamburger { color: var(--brand-navy); }
 
 /* Deep Navy Tech Hero Section */
@@ -110,7 +137,7 @@ body {
     border: 1px solid rgba(21, 181, 166, 0.3); color: var(--brand-teal); font-size: 0.75rem; font-weight: 700;
     padding: 0.4rem 0.8rem; border-radius: 30px; margin-bottom: 1.5rem; letter-spacing: 1px;
 }
-.hero-text h1 { font-size: 3rem; line-height: 1.6; margin-bottom: 0.8rem; color: #fff; font-weight: 800;} /* Line height 1.6 fixes overlapping */
+.hero-text h1 { font-size: 3rem; line-height: 1.6; margin-bottom: 0.8rem; color: #fff; font-weight: 800;} 
 .hero-slogan { font-size: 1.2rem; color: var(--brand-yellow); font-weight: 700; margin-bottom: 1rem; }
 .hero-desc { color: #94A3B8; font-size: 1.05rem; margin-bottom: 2.5rem; max-width: 500px; }
 .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
@@ -136,7 +163,7 @@ body {
 /* Section Headers */
 .section-header { text-align: center; max-width: 650px; margin: 0 auto 3.5rem; }
 .section-tag { color: var(--brand-teal); font-size: 0.9rem; font-weight: 800; letter-spacing: 2px; display: block; margin-bottom: 0.5rem; }
-.section-header h2 { font-size: 2.2rem; margin-bottom: 0.8rem; color: var(--brand-navy); line-height: 1.6; font-weight: 800;} /* Line height 1.6 applied globally for headers */
+.section-header h2 { font-size: 2.2rem; margin-bottom: 0.8rem; color: var(--brand-navy); line-height: 1.6; font-weight: 800;} 
 .section-header p { color: var(--text-muted); font-size: 1.05rem; }
 
 /* Promotions Banner */
@@ -228,7 +255,7 @@ body {
 }
 .read-more-btn {
     color: var(--brand-teal); font-size: 0.85rem; font-weight: 700; cursor: pointer;
-    background: none; border: none; padding: 0; margin-bottom: 1.5rem; display: inline-flex; align-items: center; gap: 0.3rem;
+    background: none; border: none; padding: 0; margin-bottom: 1.5rem; display: inline-flex; align-items: center; gap: 0.3rem; pointer-events: auto;
 }
 .read-more-btn:hover { color: var(--brand-navy); }
 
@@ -250,13 +277,13 @@ body {
 .hotline-buttons { display: flex; flex-direction: column; gap: 0.8rem; margin-top: 1rem; }
 .hotline-link {
     background: var(--bg-light); border: 1px solid var(--border-color); color: var(--brand-navy);
-    padding: 0.8rem 1.2rem; border-radius: 8px; text-decoration: none; font-weight: 800; transition: var(--transition);
+    padding: 0.8rem 1.2rem; border-radius: 8px; text-decoration: none; font-weight: 800; transition: var(--transition); pointer-events: auto;
 }
 .hotline-link:hover { background: var(--brand-teal); color: #fff; border-color: var(--brand-teal); }
 
 .office-map-container {
     width: 100%; height: 100%; min-height: 400px; border-radius: 14px; overflow: hidden;
-    background: #fff; border: 1px solid var(--border-color);
+    background: #fff; border: 1px solid var(--border-color); pointer-events: auto;
 }
 
 /* Footer */
@@ -286,7 +313,7 @@ body {
     justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color);
 }
 .modal-header h3 { color: var(--brand-navy); font-size: 1.2rem; font-weight: 800; line-height: 1.6;}
-.modal-close { background: rgba(0,0,0,0.05); border: none; font-size: 1.2rem; color: var(--text-muted); cursor: pointer; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: 0.2s;}
+.modal-close { background: rgba(0,0,0,0.05); border: none; font-size: 1.2rem; color: var(--text-muted); cursor: pointer; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: 0.2s; pointer-events: auto;}
 .modal-close:hover { background: rgba(0,0,0,0.1); color: var(--brand-navy); }
 .modal-body { padding: 1.5rem; }
 .selected-plan-banner {
@@ -302,11 +329,11 @@ body {
 .form-group input:focus, .form-group textarea:focus { border-color: var(--brand-teal); box-shadow: 0 0 0 3px rgba(21, 181, 166, 0.1); }
 .modal-actions { margin-top: 2rem; border-top: 1px solid var(--border-color); padding-top: 1.5rem; }
 .modal-btn-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.8rem; }
-.btn-telegram { background: #0088cc; color: #fff; font-size: 0.85rem; }
+.btn-telegram { background: #0088cc; color: #fff; font-size: 0.85rem; pointer-events: auto;}
 .btn-telegram:hover { background: #0077b5; }
-.btn-viber { background: #7360f2; color: #fff; font-size: 0.85rem; }
+.btn-viber { background: #7360f2; color: #fff; font-size: 0.85rem; pointer-events: auto;}
 .btn-viber:hover { background: #5f4cd6; }
-.btn-call { background: var(--brand-yellow); color: var(--brand-navy); font-size: 0.85rem; }
+.btn-call { background: var(--brand-yellow); color: var(--brand-navy); font-size: 0.85rem; pointer-events: auto;}
 .btn-call:hover { background: #eab308; }
 
 /* Responsive Mobile Rules */
