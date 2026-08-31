@@ -7,29 +7,31 @@
     <title>SMK High Speed Fiber Internet | Tachileik</title>
     <meta name="description" content="SMK High Speed Fiber Internet Service Provider in Tachileik, Myanmar. အကောင်းဆုံး အရည်အသွေး၊ အကောင်းဆုံး ဝန်ဆောင်မှု။">
 
+    <!-- Premium Tech Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Myanmar:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+    <!-- Solid White Navbar -->
     <nav class="navbar" id="navbar">
         <div class="container nav-container">
             <a href="#hero" class="brand-logo">
-                <img id="dynamic-logo" src="" alt="SMK Logo" class="logo-img" style="display: none;">
-                <div id="fallback-logo-text" class="brand-logo-text">
+                <img id="dynamic-logo" src="smk-logo.jpg" alt="SMK Logo" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <div id="fallback-logo-text" class="brand-logo-text" style="display: none;">
                     <span class="logo-smk">SMK</span>
                     <span class="logo-sub">FIBER INTERNET</span>
                 </div>
             </a>
 
             <div class="nav-menu" id="nav-menu">
-                <a href="#hero" class="nav-link active" onclick="closeMobileMenu()">Home</a>
-                <a href="#posters" class="nav-link" onclick="closeMobileMenu()">Flyers</a>
+                <a href="#hero" class="nav-link" onclick="closeMobileMenu()">Home</a>
                 <a href="#packages" class="nav-link" onclick="closeMobileMenu()">Packages</a>
                 <a href="#coverage" class="nav-link" onclick="closeMobileMenu()">ဝန်ဆောင်မှု ရရှိနိုင်သော ဧရိယာ</a>
                 <a href="#careers" class="nav-link" onclick="closeMobileMenu()">Careers</a>
                 <a href="#contact" class="nav-link" onclick="closeMobileMenu()">Contact Us</a>
+                <a href="#posters" class="nav-link" onclick="closeMobileMenu()">Flyers</a>
                 <a href="tel:09690607777" class="btn-nav-call"><i class="fas fa-phone-alt"></i> 09 690 607 777</a>
             </div>
 
@@ -39,6 +41,7 @@
         </div>
     </nav>
 
+    <!-- Deep Navy Tech Hero Section -->
     <header class="hero-section" id="hero">
         <div class="hero-glow glow-teal"></div>
         <div class="hero-glow glow-yellow"></div>
@@ -79,6 +82,7 @@
         </div>
     </header>
 
+    <!-- Promotions Banner -->
     <section class="promotions-section section-padding bg-main-grad" id="promotions">
         <div class="container">
             <div class="promo-banner">
@@ -106,34 +110,7 @@
         </div>
     </section>
 
-    <section class="posters-section section-padding bg-light-grad" id="posters" style="display: none;">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-tag">PROMOTIONAL FLYERS</span>
-                <h2>SMK အင်တာနက် အစီအစဉ်များ</h2>
-                <p>လူမှုကွန်ရက်စာမျက်နှာများတွင် အလွယ်တကူ မျှဝေနိုင်ပါသည်။</p>
-            </div>
-            
-            <div class="poster-grid">
-                <div class="poster-card shadow-md">
-                    <img id="dynamic-poster-1" src="" alt="SMK Promo 1" class="promo-poster-img">
-                    <div class="poster-actions">
-                        <button class="btn btn-outline-teal" onclick="sharePromoImage(1)"><i class="fas fa-share-alt"></i> မျှဝေမည် (Share)</button>
-                        <a id="download-poster-1" href="#" target="_blank" class="btn btn-teal-solid"><i class="fas fa-external-link-alt"></i> ပုံကြည့်မည်</a>
-                    </div>
-                </div>
-                
-                <div class="poster-card shadow-md">
-                    <img id="dynamic-poster-2" src="" alt="SMK Promo 2" class="promo-poster-img">
-                    <div class="poster-actions">
-                        <button class="btn btn-outline-yellow" onclick="sharePromoImage(2)"><i class="fas fa-share-alt"></i> မျှဝေမည် (Share)</button>
-                        <a id="download-poster-2" href="#" target="_blank" class="btn btn-primary"><i class="fas fa-external-link-alt"></i> ပုံကြည့်မည်</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
+    <!-- Visually Tiered Packages Section -->
     <section class="packages-section section-padding bg-main-grad" id="packages">
         <div class="container">
             <div class="section-header">
@@ -142,8 +119,10 @@
                 <p>သင့်အိမ်နှင့် လုပ်ငန်းလိုအပ်ချက်အလိုက် သင့်တော်မည့် လစဉ်သုံး အင်တာနက် အစီအစဉ်များ</p>
             </div>
 
+            <!-- Home Plans (Light Cards) -->
             <h3 class="tier-title">Home Internet Plans</h3>
             <div class="package-grid home-tier">
+                <!-- 10 Mbps -->
                 <div class="package-card light-card">
                     <div class="card-header">
                         <h3>10 <small>Mbps</small></h3>
@@ -156,6 +135,7 @@
                     <button class="btn btn-outline-teal" onclick="openOrderModal('10 Mbps', '600 Baht')">တပ်ဆင်မည် (Apply)</button>
                 </div>
 
+                <!-- 20 Mbps -->
                 <div class="package-card light-card popular-card">
                     <div class="popular-badge">POPULAR</div>
                     <div class="card-header">
@@ -169,6 +149,7 @@
                     <button class="btn btn-primary" style="width: 100%;" onclick="openOrderModal('20 Mbps', '1,100 Baht')">တပ်ဆင်မည် (Apply)</button>
                 </div>
 
+                <!-- 30 Mbps -->
                 <div class="package-card light-card">
                     <div class="card-header">
                         <h3>30 <small>Mbps</small></h3>
@@ -182,8 +163,10 @@
                 </div>
             </div>
 
+            <!-- Enterprise Plans (Dark Navy Cards) -->
             <h3 class="tier-title" style="margin-top: 4rem;">Business & Enterprise Plans</h3>
             <div class="package-grid enterprise-tier">
+                <!-- 40 Mbps -->
                 <div class="package-card dark-card">
                     <div class="card-header">
                         <h3>40 <small>Mbps</small></h3>
@@ -196,6 +179,7 @@
                     <button class="btn btn-outline-yellow" onclick="openOrderModal('40 Mbps', '2,100 Baht')">တပ်ဆင်မည် (Apply)</button>
                 </div>
 
+                <!-- 50 Mbps -->
                 <div class="package-card dark-card">
                     <div class="card-header">
                         <h3>50 <small>Mbps</small></h3>
@@ -208,6 +192,7 @@
                     <button class="btn btn-outline-yellow" onclick="openOrderModal('50 Mbps', '4,150 Baht')">တပ်ဆင်မည် (Apply)</button>
                 </div>
 
+                <!-- 70 Mbps -->
                 <div class="package-card dark-card ultimate-card">
                     <div class="popular-badge badge-teal">ULTIMATE</div>
                     <div class="card-header">
@@ -224,6 +209,7 @@
         </div>
     </section>
 
+    <!-- Real Coverage Map Section -->
     <section class="coverage-section section-padding bg-light-grad" id="coverage">
         <div class="container">
             <div class="section-header">
@@ -242,6 +228,7 @@
         </div>
     </section>
 
+    <!-- Work With Us (Careers) -->
     <section class="careers-section section-padding bg-main-grad" id="careers">
         <div class="container">
             <div class="section-header">
@@ -251,7 +238,8 @@
             </div>
 
             <div id="jobs-container" class="jobs-grid">
-                </div>
+                <!-- Handled by JavaScript -->
+            </div>
 
             <div class="general-apply-banner shadow-sm">
                 <div>
@@ -263,6 +251,7 @@
         </div>
     </section>
 
+    <!-- Contact Section (No Embedded Map - Clean Grid) -->
     <section class="contact-section section-padding bg-light-grad" id="contact">
         <div class="container">
             <div class="section-header">
@@ -271,42 +260,67 @@
                 <p>တာချီလိတ်မြို့တွင်း အင်တာနက်တပ်ဆင်လိုပါက အောက်ပါ လိပ်စာနှင့် ဖုန်းနံပါတ်များသို့ ဆက်သွယ်နိုင်ပါသည်</p>
             </div>
 
-            <div class="contact-layout">
-                <div class="contact-grid-compact">
-                    <div class="contact-card shadow-sm">
-                        <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
-                        <h3>Office Address</h3>
-                        <p class="address-text">
-                            ဝဟ (၄၃၀) ၊ နတ်စင်လမ်း ၊<br>ဆေးခမ်းရပ်ကွက် ၊ တာချီလိတ်မြို့။
-                        </p>
-                    </div>
+            <div class="contact-grid">
+                <!-- Clickable Address Card opens Native Google Maps -->
+                <div class="contact-card shadow-sm map-card" onclick="window.open('https://maps.app.goo.gl/JicumCLyyhxF1tp2A', '_blank')">
+                    <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <h3>Office Address</h3>
+                    <p class="address-text">
+                        ဝဟ (၄၃၀) ၊ နတ်စင်လမ်း ၊<br>ဆေးခမ်းရပ်ကွက် ၊ တာချီလိတ်မြို့။
+                    </p>
+                    <button class="btn btn-outline-teal" style="margin-top: 15px; width: 100%;">
+                        <i class="fas fa-location-arrow"></i> Open in Maps
+                    </button>
+                </div>
 
-                    <div class="contact-card shadow-sm">
-                        <div class="contact-icon"><i class="fas fa-phone-volume"></i></div>
-                        <h3>Hotline Phones</h3>
-                        <div class="hotline-buttons">
-                            <a href="tel:09690607777" class="hotline-link"><i class="fas fa-phone"></i> 09 690 607 777</a>
-                            <a href="tel:09690467777" class="hotline-link"><i class="fas fa-phone"></i> 09 690 467 777</a>
-                        </div>
-                    </div>
-
-                    <div class="contact-card shadow-sm">
-                        <div class="contact-icon"><i class="fab fa-facebook-messenger"></i></div>
-                        <h3>Online Support</h3>
-                        <p>Facebook Page Messenger မှတစ်ဆင့်လည်း အသေးစိတ် အချိန်မရွေး မေးမြန်းစုံစမ်းနိုင်ပါသည်။</p>
-                        <a href="https://facebook.com" target="_blank" class="btn btn-teal-solid" style="margin-top: 15px; width: 100%;"><i class="fab fa-facebook"></i> Contact Messenger</a>
+                <div class="contact-card shadow-sm">
+                    <div class="contact-icon"><i class="fas fa-phone-volume"></i></div>
+                    <h3>Hotline Phones</h3>
+                    <div class="hotline-buttons">
+                        <a href="tel:09690607777" class="hotline-link"><i class="fas fa-phone"></i> 09 690 607 777</a>
+                        <a href="tel:09690467777" class="hotline-link"><i class="fas fa-phone"></i> 09 690 467 777</a>
                     </div>
                 </div>
 
-                <div class="office-map-container shadow-md">
-                    <div style="width: 100%; height: 100%;">
-                        <iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" style="border:0; min-height: 400px;" allowfullscreen src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBVizdQeh3udy11xDc5Ao2YStR2gLc-rfc&q=20.467657%2C99.916057&maptype=roadmap&zoom=16"></iframe>
+                <div class="contact-card shadow-sm">
+                    <div class="contact-icon"><i class="fab fa-facebook-messenger"></i></div>
+                    <h3>Online Support</h3>
+                    <p>Facebook Page Messenger မှတစ်ဆင့်လည်း အသေးစိတ် အချိန်မရွေး မေးမြန်းစုံစမ်းနိုင်ပါသည်။</p>
+                    <a href="https://facebook.com" target="_blank" class="btn btn-teal-solid" style="margin-top: 15px; width: 100%;"><i class="fab fa-facebook"></i> Contact Messenger</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Promotional Posters Section (Moved to Bottom) -->
+    <section class="posters-section section-padding bg-main-grad" id="posters" style="display: none;">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">PROMOTIONAL FLYERS</span>
+                <h2>SMK အင်တာနက် အစီအစဉ်များ</h2>
+                <p>လူမှုကွန်ရက်စာမျက်နှာများတွင် အလွယ်တကူ မျှဝေနိုင်ပါသည်။</p>
+            </div>
+            
+            <div class="poster-grid">
+                <div class="poster-card shadow-md">
+                    <img id="dynamic-poster-1" src="" alt="SMK Promo 1" class="promo-poster-img">
+                    <div class="poster-actions">
+                        <!-- Only Share Button Remains -->
+                        <button class="btn btn-teal-solid" onclick="sharePromoImage(1)"><i class="fas fa-share-alt"></i> မျှဝေမည် (Share)</button>
+                    </div>
+                </div>
+                
+                <div class="poster-card shadow-md">
+                    <img id="dynamic-poster-2" src="" alt="SMK Promo 2" class="promo-poster-img">
+                    <div class="poster-actions">
+                        <button class="btn btn-primary" onclick="sharePromoImage(2)"><i class="fas fa-share-alt"></i> မျှဝေမည် (Share)</button>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Footer -->
     <footer class="footer">
         <div class="container footer-content">
             <div class="footer-brand">
@@ -319,6 +333,36 @@
         </div>
     </footer>
 
+    <!-- Job Description Modal (NEW) -->
+    <div class="modal-overlay" id="job-modal">
+        <div class="modal-box" style="max-width: 600px;">
+            <div class="modal-header">
+                <h3 id="job-modal-title" style="color: var(--brand-navy); font-weight: 800;">-</h3>
+                <button class="modal-close" onclick="closeJobModal()"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body" style="max-height: 70vh; overflow-y: auto;">
+                <div class="job-meta-row" id="job-modal-meta" style="margin-bottom: 1.5rem;">
+                    <!-- Tags injected here -->
+                </div>
+                
+                <div class="form-group">
+                    <label><i class="fas fa-briefcase text-teal"></i> Job Description (လုပ်ငန်းတာဝန်များ)</label>
+                    <p id="job-modal-desc" style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.8; background: var(--bg-light); padding: 1rem; border-radius: 8px;"></p>
+                </div>
+                
+                <div class="form-group" style="margin-top: 1.5rem;">
+                    <label><i class="fas fa-clipboard-list text-yellow"></i> Requirements (လိုအပ်ချက်များ)</label>
+                    <p id="job-modal-req" style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.8; background: var(--bg-light); padding: 1rem; border-radius: 8px;"></p>
+                </div>
+
+                <div class="modal-actions" style="margin-top: 2rem;">
+                    <a id="job-modal-apply" href="#" class="btn btn-teal-solid" style="width: 100%;"><i class="fas fa-paper-plane"></i> ယခု လျှောက်ထားမည် (Apply Now)</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Premium Animated Checkout Modal -->
     <div class="modal-overlay" id="order-modal">
         <div class="modal-box">
             <div class="modal-header">
