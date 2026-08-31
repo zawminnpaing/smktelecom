@@ -50,7 +50,7 @@ document.addEventListener('keydown', (e) => {
 // ==========================================
 
 // Put your published Google Sheets CSV URL for Job Postings here later
-const CAREERS_CSV_URL = ""; 
+const CAREERS_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRChQAeFELl9J-zQFHnw4BZXOD5J67px4xQ4NVT7j5A-_q1wC2_eq2wmvlBB_AdK6HuFzlXPW3YLjzb/pub?gid=0&single=true&output=csv"; 
 
 // SMK Tachileik Contact Details
 const STORE_PHONE = "959690607777"; 
@@ -163,7 +163,13 @@ function renderJobs(jobsList) {
                 <h3>${job.title}</h3>
                 
                 <div class="job-desc-container">
-                    <div class="job-desc-content">${job.description || 'Join our high-speed internet team in Tachileik.'}</div>
+                    <div class="job-desc-content">
+                        <strong>Job Description:</strong><br>
+                        ${job.description || 'Join our high-speed internet team in Tachileik.'}
+                        <br><br>
+                        <strong>Requirements:</strong><br>
+                        ${job.requirements || 'Contact us for more details.'}
+                    </div>
                     <button class="read-more-btn" onclick="toggleJobDesc(this)">Read More <i class="fas fa-chevron-down"></i></button>
                 </div>
             </div>
