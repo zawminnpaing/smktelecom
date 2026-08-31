@@ -2,29 +2,29 @@
 // CONFIGURATION & STORE DATA
 // ==========================================
 
-// Put your published Google Sheets CSV URL for Job Postings here:
+// Put your published Google Sheets CSV URL for Job Postings here later
 const CAREERS_CSV_URL = ""; 
 
 // SMK Tachileik Contact Details
 const STORE_PHONE = "959690607777"; 
 
-// Default Jobs Fallback in case Google Sheet is empty or not yet connected
+// Hardcoded Beautiful Fallback Jobs
 const defaultJobs = [
     {
         id: "JOB-01",
         title: "Field Optical Fiber Technician",
-        department: "Operations & Maintenance (O&M)",
+        department: "Operations & Maintenance",
         location: "Tachileik (တာချီလိတ်)",
         type: "Full-Time",
-        description: "တာချီလိတ်မြို့တွင်း Fiber Cable သွယ်တန်းခြင်း၊ Splicing ပြုလုပ်ခြင်းနှင့် အိမ်သုံး Router များ တပ်ဆင်ပြုပြင်ပေးနိုင်သူ။"
+        description: "တာချီလိတ်မြို့တွင်း Fiber Cable သွယ်တန်းခြင်း၊ Splicing ပြုလုပ်ခြင်းနှင့် အိမ်သုံး Router များ တပ်ဆင်ပြုပြင်ပေးနိုင်သူ။ (အတွေ့အကြုံရှိသူ ဦးစားပေးမည်။)"
     },
     {
         id: "JOB-02",
         title: "NOC & Customer Support Specialist",
         department: "Technical Support",
         location: "Tachileik (တာချီလိတ်)",
-        type: "Full-Time / Shift",
-        description: "ကွန်ရက်လိုင်းများ စောင့်ကြည့်စစ်ဆေးခြင်း၊ Customer များ၏ လိုင်းပြဿနာများကို ဖုန်းနှင့် အွန်လိုင်းမှတစ်ဆင့် ဖြေရှင်းပေးနိုင်သူ။"
+        type: "Shift Schedule",
+        description: "ကွန်ရက်လိုင်းများ စောင့်ကြည့်စစ်ဆေးခြင်း (Network Monitoring) နှင့် Customer များ၏ လိုင်းပြဿနာများကို ဖုန်း၊ အွန်လိုင်းမှ ဖြေရှင်းပေးနိုင်သူ။"
     },
     {
         id: "JOB-03",
@@ -32,7 +32,7 @@ const defaultJobs = [
         department: "Commercial Sales",
         location: "Tachileik (တာချီလိတ်)",
         type: "Full-Time",
-        description: "လူနေရပ်ကွက်များနှင့် လုပ်ငန်းများသို့ SMK အင်တာနက် အစီအစဉ်များ မိတ်ဆက်ဖြန့်ချိပေးနိုင်သူ။"
+        description: "လူနေရပ်ကွက်များနှင့် စီးပွားရေးလုပ်ငန်းများသို့ SMK အင်တာနက် အစီအစဉ်များ မိတ်ဆက်ဖြန့်ချိပေးနိုင်သူ။ (Communication Skill ကောင်းမွန်ရမည်။)"
     }
 ];
 
@@ -42,10 +42,20 @@ let selectedPlanData = {
 };
 
 // ==========================================
-// INITIALIZATION
+// INITIALIZATION & SCROLL EVENTS
 // ==========================================
 document.addEventListener('DOMContentLoaded', () => {
     fetchCareersData();
+});
+
+// Dynamic Sticky Navbar Animation
+window.addEventListener('scroll', () => {
+    const navbar = document.getElementById('navbar');
+    if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+    } else {
+        navbar.classList.remove('scrolled');
+    }
 });
 
 // ==========================================
@@ -82,7 +92,7 @@ function renderJobs(jobsList) {
 
     jobsList.forEach(job => {
         const card = document.createElement('div');
-        card.className = 'job-card shadow-card';
+        card.className = 'job-card shadow-sm';
         card.innerHTML = `
             <div>
                 <div class="job-meta-row">
@@ -93,7 +103,7 @@ function renderJobs(jobsList) {
                 <h3>${job.title}</h3>
                 <p class="job-desc">${job.description || 'Join our high-speed internet team in Tachileik.'}</p>
             </div>
-            <a href="mailto:smktelecom.tcl@gmail.com?subject=Application%20for%20${encodeURIComponent(job.title)}" class="btn btn-outline" style="width: 100%;"><i class="fas fa-paper-plane"></i> လျှောက်ထားမည် (Apply)</a>
+            <a href="mailto:smktelecom.tcl@gmail.com?subject=Application%20for%20${encodeURIComponent(job.title)}" class="btn btn-outline-teal" style="width: 100%; margin-top: 1rem;"><i class="fas fa-paper-plane"></i> လျှောက်ထားမည် (Apply)</a>
         `;
         container.appendChild(card);
     });
@@ -108,11 +118,14 @@ function openOrderModal(planName, planPrice) {
     document.getElementById('modal-plan-name').innerText = planName;
     document.getElementById('modal-plan-price').innerText = planPrice;
     
-    document.getElementById('order-modal').style.display = 'flex';
+    // Add the CSS class to trigger the fade-in / scale-up animation
+    const modal = document.getElementById('order-modal');
+    modal.classList.add('show');
 }
 
 function closeOrderModal() {
-    document.getElementById('order-modal').style.display = 'none';
+    const modal = document.getElementById('order-modal');
+    modal.classList.remove('show');
 }
 
 // Close modal on click outside
