@@ -304,3 +304,26 @@ body { font-family: 'Plus Jakarta Sans', 'Noto Sans Myanmar', sans-serif; color:
     .modal-btn-row { grid-template-columns: 1fr; } 
     .btn { white-space: normal; text-align: center; } 
 }
+
+/* =========================================
+   DYNAMIC BADGE HIGHLIGHTS (DEEP MAGENTA)
+========================================= */
+.package-card.has-badge {
+    border: 3px solid #D81B60 !important; /* Bold Deep Magenta Border */
+    transform: translateY(-5px); /* Makes the card pop out by default */
+    box-shadow: 0 15px 35px rgba(216, 27, 96, 0.15) !important; /* Magenta glow */
+}
+
+.package-card.has-badge:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(216, 27, 96, 0.3) !important; /* Stronger glow on hover */
+}
+
+/* Make the badge itself match the Deep Magenta theme */
+.package-card.has-badge .badge-dynamic {
+    background: #D81B60 !important;
+    color: #ffffff !important;
+    border: 2px solid #fff; /* Clean white outline */
+    box-shadow: 0 4px 10px rgba(216, 27, 96, 0.4);
+    top: -16px; /* Adjusted slightly to sit perfectly on the 3px border */
+}
