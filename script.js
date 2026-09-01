@@ -27,17 +27,18 @@ document.addEventListener('keydown', (e) => {
 // CONFIGURATION & STORE DATA
 // ==========================================
 const CAREERS_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRChQAeFELl9J-zQFHnw4BZXOD5J67px4xQ4NVT7j5A-_q1wC2_eq2wmvlBB_AdK6HuFzlXPW3YLjzb/pub?gid=0&single=true&output=csv"; 
+const PACKAGES_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRChQAeFELl9J-zQFHnw4BZXOD5J67px4xQ4NVT7j5A-_q1wC2_eq2wmvlBB_AdK6HuFzlXPW3YLjzb/pub?gid=2060778030&single=true&output=csv";
+
 const STORE_PHONE = "959690607777"; 
 
 let poster1Link = "";
 let poster2Link = "";
-
-// Removed hardcoded default jobs. We now rely entirely on the Google Sheet.
 let globalJobs = []; 
 let selectedPlanData = { name: "", price: "" };
 
 document.addEventListener('DOMContentLoaded', () => { 
     fetchCareersData(); 
+    fetchPackagesData(); // NEW: Fetch the plans dynamically
     initScrollReveal(); 
 });
 
@@ -60,9 +61,105 @@ function initScrollReveal() {
 }
 
 // ==========================================
-// FETCH GOOGLE SHEETS DATA
+// FETCH DYNAMIC PACKAGES (10 THEME LOOP)
+// ==========================================
+function fetchPackagesData() {
+    const packagesContainer = document.getElementById('packages-container');
+
+    if (PACKAGES_CSV_URL && PACKAGES_CSV_URL.trim() !== "") {
+        const cacheBuster = "&t=" + new Date().getTime();
+        Papa.parse(PACKAGES_CSV_URL + cacheBuster, {
+            download: true,
+            header: true,
+            complete: function(results) {
+                // Clear loading spinner
+                packagesContainer.innerHTML = '';
+                
+                const livePlans = results.data.filter(row => row.plan_name && row.plan_name.trim() !== '');
+                
+                if (livePlans.length === 0) {
+                    packagesContainer.innerHTML = '<p style="text-align:center; color: var(--text-muted);">No packages currently available.</p>';
+                    return;
+                }
+
+                // Group by Category and preserve order
+                const categories = []; 
+                const groupedPlans = {};
+
+                livePlans.forEach(plan => {
+                    const cat = plan.category ? plan.category.trim() : 'Other Plans';
+                    if (!groupedPlans[cat]) {
+                        groupedPlans[cat] = [];
+                        categories.push(cat);
+                    }
+                    groupedPlans[cat].push(plan);
+                });
+
+                // Generate HTML for each Category
+                categories.forEach((cat, index) => {
+                    // Loop 1 through 10
+                    const themeNum = (index % 10) + 1;
+
+                    // 1. Create Category Title
+                    const title = document.createElement('div');
+                    title.className = 'tier-title reveal active'; // trigger animation instantly since they loaded
+                    title.innerText = cat;
+                    if (index > 0) title.style.marginTop = '4rem'; // Add space between categories
+                    packagesContainer.appendChild(title);
+
+                    // 2. Create Grid for this Category
+                    const grid = document.createElement('div');
+                    grid.className = 'package-grid reveal active';
+
+                    groupedPlans[cat].forEach(plan => {
+                        const card = document.createElement('div');
+                        card.className = `package-card theme-${themeNum}`;
+
+                        // Check if badge exists
+                        const badgeHtml = (plan.badge && plan.badge.trim() !== '') ? `<div class="badge-dynamic">${plan.badge.trim()}</div>` : '';
+                        
+                        // Check if description exists
+                        const planDesc = (plan.description && plan.description.trim() !== '') ? `<p class="plan-desc">${plan.description.trim()}</p>` : '';
+
+                        // Assign button style based on Theme Number to keep contrast beautiful
+                        let btnClass = 'btn-outline-teal';
+                        if ([2, 4, 10].includes(themeNum)) btnClass = 'btn-primary'; 
+                        if ([5, 7].includes(themeNum)) btnClass = 'btn-outline'; 
+                        if ([3, 6].includes(themeNum)) btnClass = 'btn-teal-solid'; 
+                        if ([8, 9].includes(themeNum)) btnClass = 'btn-outline-teal'; 
+
+                        card.innerHTML = `
+                            ${badgeHtml}
+                            <div class="card-header">
+                                <h3>${plan.speed}</h3>
+                                <p class="plan-subtitle">${plan.plan_name}</p>
+                            </div>
+                            ${planDesc}
+                            <div class="card-price">
+                                <span class="price-val">${plan.price}</span>
+                                <span class="price-curr"></span>
+                            </div>
+                            <button class="btn ${btnClass} shimmer-btn" style="width: 100%;" onclick="openOrderModal('${plan.plan_name}', '${plan.price}')">တပ်ဆင်မည် (Apply)</button>
+                        `;
+                        grid.appendChild(card);
+                    });
+                    
+                    packagesContainer.appendChild(grid);
+                });
+            },
+            error: function() { 
+                packagesContainer.innerHTML = '<p style="text-align:center; color: red;">Failed to load packages. Please check connection.</p>';
+            }
+        });
+    }
+}
+
+// ==========================================
+// FETCH GOOGLE SHEETS DATA (JOBS)
 // ==========================================
 function fetchCareersData() {
+    const jobsContainer = document.getElementById('jobs-container');
+
     if (CAREERS_CSV_URL && CAREERS_CSV_URL.trim() !== "") {
         const cacheBuster = "&t=" + new Date().getTime();
         Papa.parse(CAREERS_CSV_URL + cacheBuster, {
@@ -72,7 +169,6 @@ function fetchCareersData() {
                 if (results.data && results.data.length > 0) {
                     const firstRow = results.data[0];
                     
-                    // Logo Update
                     if (firstRow.logo_url && firstRow.logo_url.trim() !== "") {
                         const navLogo = document.getElementById('dynamic-logo');
                         navLogo.src = firstRow.logo_url;
@@ -85,8 +181,6 @@ function fetchCareersData() {
                         
                         document.getElementById('dynamic-favicon').href = firstRow.logo_url;
                     }
-                    
-                    // Posters Update
                     if (firstRow.poster_1_url && firstRow.poster_1_url.trim() !== "") {
                         poster1Link = firstRow.poster_1_url;
                         document.getElementById('dynamic-poster-1').src = poster1Link;
@@ -98,7 +192,7 @@ function fetchCareersData() {
                         document.getElementById('posters').style.display = "block"; 
                     }
                 }
-                // Filter out empty rows, then render
+                
                 globalJobs = results.data.filter(row => row.title && row.title.trim() !== '');
                 renderJobs(globalJobs);
             },
@@ -163,7 +257,6 @@ function renderJobs(jobsList) {
     const container = document.getElementById('jobs-container');
     container.innerHTML = '';
 
-    // If there are no jobs in the Google Sheet, show the "No Vacancies" message
     if (!jobsList || jobsList.length === 0) {
         container.innerHTML = `
             <div style="text-align: center; padding: 4rem 2rem; background: #fff; border-radius: 16px; border: 2px dashed var(--border-color); grid-column: 1 / -1;">
@@ -178,7 +271,6 @@ function renderJobs(jobsList) {
         return;
     }
 
-    // If there ARE jobs, generate the cards
     jobsList.forEach((job, index) => {
         const card = document.createElement('div');
         card.className = 'job-card shadow-sm';
