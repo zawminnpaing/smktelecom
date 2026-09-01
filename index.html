@@ -7,14 +7,17 @@
     <title>SMK High Speed Fiber Internet | Tachileik</title>
     <meta name="description" content="SMK High Speed Fiber Internet Service Provider in Tachileik, Myanmar. အကောင်းဆုံး အရည်အသွေး၊ အကောင်းဆုံး ဝန်ဆောင်မှု။">
 
+    <!-- Dynamic Favicon -->
     <link id="dynamic-favicon" rel="icon" type="image/jpeg" href="smk-logo.jpg">
 
+    <!-- Premium Tech Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Myanmar:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+    <!-- Solid White Navbar -->
     <nav class="navbar" id="navbar">
         <div class="container nav-container">
             <a href="#hero" class="brand-logo">
@@ -41,8 +44,9 @@
         </div>
     </nav>
 
+    <!-- Deep Navy Tech Hero Section -->
     <header class="hero-section" id="hero">
-        
+        <!-- Horizontal Data Particles Animation -->
         <div class="particles-container">
             <div class="particle p1"></div>
             <div class="particle p2"></div>
@@ -56,6 +60,7 @@
         
         <div class="container hero-grid">
             <div class="hero-text reveal">
+                <!-- Hero Section Logo -->
                 <img id="dynamic-hero-logo" src="smk-logo.jpg" alt="SMK Logo" class="hero-logo" onerror="this.style.display='none';">
                 
                 <div class="hero-badge">
@@ -92,6 +97,7 @@
         </div>
     </header>
 
+    <!-- Promotions Banner -->
     <section class="promotions-section section-padding bg-main-grad reveal" id="promotions">
         <div class="container">
             <div class="promo-banner">
@@ -119,6 +125,7 @@
         </div>
     </section>
 
+    <!-- Dynamic Packages Section (Controlled by Google Sheets) -->
     <section class="packages-section section-padding bg-main-grad" id="packages">
         <div class="container">
             <div class="section-header reveal">
@@ -127,70 +134,18 @@
                 <p>သင့်အိမ်နှင့် လုပ်ငန်းလိုအပ်ချက်အလိုက် သင့်တော်မည့် လစဉ်သုံး အင်တာနက် အစီအစဉ်များ</p>
             </div>
 
-            <div class="tier-title reveal">Home Internet Plans</div>
-            <div class="package-grid home-tier reveal">
-                <div class="package-card light-card">
-                    <div class="card-header">
-                        <h3>10 <small>Mbps</small></h3>
-                        <p class="plan-subtitle">Home Basic</p>
-                    </div>
-                    <div class="card-price"><span class="price-val">600</span> <span class="price-curr">Baht / Month</span></div>
-                    <button class="btn btn-outline-teal shimmer-btn" onclick="openOrderModal('10 Mbps', '600 Baht')">တပ်ဆင်မည် (Apply)</button>
-                </div>
-
-                <div class="package-card light-card popular-card">
-                    <div class="popular-badge">POPULAR</div>
-                    <div class="card-header">
-                        <h3>20 <small>Mbps</small></h3>
-                        <p class="plan-subtitle">Home Standard</p>
-                    </div>
-                    <div class="card-price"><span class="price-val">1,100</span> <span class="price-curr">Baht / Month</span></div>
-                    <button class="btn btn-primary shimmer-btn" style="width: 100%;" onclick="openOrderModal('20 Mbps', '1,100 Baht')">တပ်ဆင်မည် (Apply)</button>
-                </div>
-
-                <div class="package-card light-card">
-                    <div class="card-header">
-                        <h3>30 <small>Mbps</small></h3>
-                        <p class="plan-subtitle">Family Pro</p>
-                    </div>
-                    <div class="card-price"><span class="price-val">1,600</span> <span class="price-curr">Baht / Month</span></div>
-                    <button class="btn btn-outline-teal shimmer-btn" onclick="openOrderModal('30 Mbps', '1,600 Baht')">တပ်ဆင်မည် (Apply)</button>
+            <!-- JavaScript will inject dynamic categories and pricing cards here -->
+            <div id="packages-container">
+                <div style="text-align: center; padding: 3rem;">
+                    <i class="fas fa-spinner fa-spin" style="font-size: 2.5rem; color: var(--brand-teal);"></i>
+                    <p style="margin-top: 1rem; color: var(--text-muted); font-weight: 600;">Loading Packages...</p>
                 </div>
             </div>
 
-            <div class="tier-title reveal" style="margin-top: 4rem;">Business & Enterprise Plans</div>
-            <div class="package-grid enterprise-tier reveal">
-                <div class="package-card dark-card">
-                    <div class="card-header">
-                        <h3>40 <small>Mbps</small></h3>
-                        <p class="plan-subtitle text-yellow">Business Lite</p>
-                    </div>
-                    <div class="card-price"><span class="price-val text-white">2,100</span> <span class="price-curr">Baht / Month</span></div>
-                    <button class="btn btn-outline-yellow shimmer-btn" onclick="openOrderModal('40 Mbps', '2,100 Baht')">တပ်ဆင်မည် (Apply)</button>
-                </div>
-
-                <div class="package-card dark-card">
-                    <div class="card-header">
-                        <h3>50 <small>Mbps</small></h3>
-                        <p class="plan-subtitle text-yellow">Enterprise Plus</p>
-                    </div>
-                    <div class="card-price"><span class="price-val text-white">4,150</span> <span class="price-curr">Baht / Month</span></div>
-                    <button class="btn btn-outline-yellow shimmer-btn" onclick="openOrderModal('50 Mbps', '4,150 Baht')">တပ်ဆင်မည် (Apply)</button>
-                </div>
-
-                <div class="package-card dark-card ultimate-card">
-                    <div class="popular-badge badge-teal">ULTIMATE</div>
-                    <div class="card-header">
-                        <h3>70 <small>Mbps</small></h3>
-                        <p class="plan-subtitle text-teal">Ultimate Enterprise</p>
-                    </div>
-                    <div class="card-price"><span class="price-val text-white">5,200</span> <span class="price-curr">Baht / Month</span></div>
-                    <button class="btn btn-teal-solid shimmer-btn" style="width: 100%;" onclick="openOrderModal('70 Mbps', '5,200 Baht')">တပ်ဆင်မည် (Apply)</button>
-                </div>
-            </div>
         </div>
     </section>
 
+    <!-- Coverage Map Section -->
     <section class="coverage-section section-padding bg-light-grad reveal" id="coverage">
         <div class="container">
             <div class="section-header">
@@ -209,6 +164,7 @@
         </div>
     </section>
 
+    <!-- Careers Section -->
     <section class="careers-section section-padding bg-main-grad" id="careers">
         <div class="container">
             <div class="section-header reveal">
@@ -218,7 +174,10 @@
             </div>
 
             <div id="jobs-container" class="jobs-grid reveal">
+                <div style="text-align: center; padding: 2rem; width: 100%;">
+                    <i class="fas fa-spinner fa-spin" style="font-size: 2rem; color: var(--brand-teal);"></i>
                 </div>
+            </div>
 
             <div class="general-apply-banner shadow-sm reveal">
                 <div>
@@ -230,6 +189,7 @@
         </div>
     </section>
 
+    <!-- Contact Section -->
     <section class="contact-section section-padding bg-light-grad reveal" id="contact">
         <div class="container">
             <div class="section-header">
@@ -269,6 +229,7 @@
         </div>
     </section>
 
+    <!-- Promotional Posters Section (Bottom) -->
     <section class="posters-section section-padding bg-main-grad reveal" id="posters" style="display: none;">
         <div class="container">
             <div class="section-header">
@@ -295,6 +256,7 @@
         </div>
     </section>
 
+    <!-- Footer -->
     <footer class="footer">
         <div class="container footer-content">
             <div class="footer-brand">
@@ -303,11 +265,12 @@
             </div>
             <div class="footer-copy">
                 <p>© 2026 SHWE MAHAR MAE KHONG Co., Ltd. All rights reserved.</p>
-                <p>Developed & Owned by ZAW MIN PAING.</p>
+                <p style="margin-top: 5px; font-weight: 800; color: var(--brand-teal);">Developed & Owned by ZAW MIN PAING.</p>
             </div>
         </div>
     </footer>
 
+    <!-- Job Description Modal -->
     <div class="modal-overlay" id="job-modal">
         <div class="modal-box">
             <div class="modal-header">
@@ -334,6 +297,7 @@
         </div>
     </div>
 
+    <!-- Premium Animated Checkout Modal -->
     <div class="modal-overlay" id="order-modal">
         <div class="modal-box">
             <div class="modal-header">
