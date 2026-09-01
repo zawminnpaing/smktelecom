@@ -111,12 +111,16 @@ function fetchPackagesData() {
                     const grid = document.createElement('div');
                     grid.className = 'package-grid reveal active';
 
-                    groupedPlans[cat].forEach(plan => {
+                                        groupedPlans[cat].forEach(plan => {
                         const card = document.createElement('div');
-                        card.className = `package-card theme-${themeNum}`;
-
-                        // Check if badge exists
-                        const badgeHtml = (plan.badge && plan.badge.trim() !== '') ? `<div class="badge-dynamic">${plan.badge.trim()}</div>` : '';
+                        
+                        // 1. Check if badge exists
+                        const hasBadge = (plan.badge && plan.badge.trim() !== '');
+                        const badgeHtml = hasBadge ? `<div class="badge-dynamic">${plan.badge.trim()}</div>` : '';
+                        
+                        // 2. Add 'has-badge' class to the card if a badge exists
+                        const badgeClass = hasBadge ? ' has-badge' : '';
+                        card.className = `package-card theme-${themeNum}${badgeClass}`;
                         
                         // Check if description exists
                         const planDesc = (plan.description && plan.description.trim() !== '') ? `<p class="plan-desc">${plan.description.trim()}</p>` : '';
@@ -127,6 +131,9 @@ function fetchPackagesData() {
                         if ([5, 7].includes(themeNum)) btnClass = 'btn-outline'; 
                         if ([3, 6].includes(themeNum)) btnClass = 'btn-teal-solid'; 
                         if ([8, 9].includes(themeNum)) btnClass = 'btn-outline-teal'; 
+                        
+                        // If it has a badge, force a vibrant button to match the magenta border
+                        if (hasBadge) btnClass = 'btn-primary';
 
                         card.innerHTML = `
                             ${badgeHtml}
@@ -143,6 +150,7 @@ function fetchPackagesData() {
                         `;
                         grid.appendChild(card);
                     });
+
                     
                     packagesContainer.appendChild(grid);
                 });
