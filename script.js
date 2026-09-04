@@ -114,7 +114,7 @@ function fetchPackagesData() {
 }
 
 // ==========================================
-// JOBS & LOGOS
+// JOBS & LOGOS & DYNAMIC HERO IMAGE
 // ==========================================
 function fetchCareersData() {
     const jobsContainer = document.getElementById('jobs-container');
@@ -132,6 +132,12 @@ function fetchCareersData() {
                         document.getElementById('dynamic-hero-logo').style.display = "block";
                         document.getElementById('dynamic-favicon').href = firstRow.logo_url;
                     }
+                    
+                    // NEW: Dynamically fetch Hero Image
+                    if (firstRow.hero_url && firstRow.hero_url.trim() !== "") {
+                        document.getElementById('dynamic-hero-img').src = firstRow.hero_url;
+                    }
+
                     if (firstRow.poster_1_url && firstRow.poster_1_url.trim() !== "") {
                         document.getElementById('dynamic-poster-1').src = firstRow.poster_1_url;
                         document.getElementById('posters').style.display = "block"; 
