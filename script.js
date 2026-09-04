@@ -18,13 +18,13 @@ document.addEventListener('keydown', (e) => {
 
 const CAREERS_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRChQAeFELl9J-zQFHnw4BZXOD5J67px4xQ4NVT7j5A-_q1wC2_eq2wmvlBB_AdK6HuFzlXPW3YLjzb/pub?gid=0&single=true&output=csv"; 
 const PACKAGES_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRChQAeFELl9J-zQFHnw4BZXOD5J67px4xQ4NVT7j5A-_q1wC2_eq2wmvlBB_AdK6HuFzlXPW3YLjzb/pub?gid=2060778030&single=true&output=csv";
-const STORE_PHONE = "959690607777"; 
 
-let poster1Link = "";
-let poster2Link = "";
+// REAL LIVE NUMBER CONFIGURED HERE
+const STORE_PHONE = "959793155856"; 
+
 let globalJobs = []; 
 let selectedPlanData = { name: "", price: "" };
-let pendingContactMessage = ""; // For the new Contact Form logic
+let pendingContactMessage = ""; 
 
 document.addEventListener('DOMContentLoaded', () => { 
     fetchCareersData(); 
@@ -69,7 +69,6 @@ function fetchPackagesData() {
                 categories.forEach((cat, index) => {
                     const themeNum = (index % 10) + 1;
                     
-                    // Assign a smart icon based on category name
                     let iconHtml = '<i class="fas fa-server"></i>';
                     if (cat.toLowerCase().includes('home')) iconHtml = '<i class="fas fa-home"></i>';
                     if (cat.toLowerCase().includes('business') || cat.toLowerCase().includes('enterprise')) iconHtml = '<i class="fas fa-building"></i>';
@@ -134,13 +133,11 @@ function fetchCareersData() {
                         document.getElementById('dynamic-favicon').href = firstRow.logo_url;
                     }
                     if (firstRow.poster_1_url && firstRow.poster_1_url.trim() !== "") {
-                        poster1Link = firstRow.poster_1_url;
-                        document.getElementById('dynamic-poster-1').src = poster1Link;
+                        document.getElementById('dynamic-poster-1').src = firstRow.poster_1_url;
                         document.getElementById('posters').style.display = "block"; 
                     }
                     if (firstRow.poster_2_url && firstRow.poster_2_url.trim() !== "") {
-                        poster2Link = firstRow.poster_2_url;
-                        document.getElementById('dynamic-poster-2').src = poster2Link;
+                        document.getElementById('dynamic-poster-2').src = firstRow.poster_2_url;
                         document.getElementById('posters').style.display = "block"; 
                     }
                 }
@@ -167,12 +164,6 @@ function renderJobs(jobsList) {
     });
 }
 
-function sharePromoImage(posterNumber) {
-    const linkToShare = posterNumber === 1 ? poster1Link : poster2Link;
-    if (navigator.share) { navigator.share({ title: 'SMK Internet', url: linkToShare }).catch(console.error); } 
-    else { navigator.clipboard.writeText(linkToShare).then(() => { alert("✅ ပုံ၏ Link ကို Copy ကူးယူပြီးပါပြီ။"); }); }
-}
-
 // ==========================================
 // MODALS LOGIC
 // ==========================================
@@ -196,9 +187,11 @@ function openOrderModal(planName, planPrice) {
 }
 function closeOrderModal() { document.getElementById('order-modal').classList.remove('show'); }
 
-// NEW: Contact Form Logic
+// ==========================================
+// LIVE LIVE MESSAGING LOGIC
+// ==========================================
 function submitContactForm(event) {
-    event.preventDefault(); // Stop page reload
+    event.preventDefault(); 
     const name = document.getElementById('contact-name').value.trim();
     const phone = document.getElementById('contact-phone').value.trim();
     const email = document.getElementById('contact-email').value.trim();
@@ -206,25 +199,42 @@ function submitContactForm(event) {
     const message = document.getElementById('contact-message').value.trim();
 
     pendingContactMessage = `📩 [SMK WEBSITE INQUIRY]\n\n👤 Name: ${name}\n📞 Phone: ${phone}\n📧 Email: ${email || 'Not provided'}\n📌 Subject: ${subject}\n\n💬 Message:\n${message}`;
-    
-    // Open action modal to choose platform
     document.getElementById('contact-action-modal').classList.add('show');
 }
 function closeContactActionModal() { document.getElementById('contact-action-modal').classList.remove('show'); }
 
 function dispatchContactMessage(platform) {
-    alert("🔒 DEMO VERSION: In the live version, this will open " + platform + " with the message pre-filled.");
+    const encodedMessage = encodeURIComponent(pendingContactMessage);
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+    if (platform === 'telegram') {
+        if (isMobile) window.open(`https://t.me/+${STORE_PHONE}?text=${encodedMessage}`, '_blank');
+        else window.open(`tg://resolve?phone=${STORE_PHONE}&text=${encodedMessage}`, '_self');
+    } else if (platform === 'viber') {
+        if (isMobile) window.open(`viber://chat?number=%2B${STORE_PHONE}&draft=${encodedMessage}`, '_blank');
+        else window.open(`viber://chat?number=%2B${STORE_PHONE}&draft=${encodedMessage}`, '_self');
+    }
     closeContactActionModal();
-    // Live code goes here (same logic as the order form)
 }
 
 function sendOrderVia(platform) {
     const name = document.getElementById('order-name').value.trim();
     const phone = document.getElementById('order-phone').value.trim();
     const address = document.getElementById('order-address').value.trim();
-    if (!name || !phone || !address) { alert("Please fill in all details."); return; }
-    if (platform === 'call') { window.location.href = `tel:09690607777`; return; }
-    alert("🔒 DEMO VERSION: In the live version, this forwards the order to Viber/Telegram.");
+
+    if (!name || !phone || !address) { alert("ကျေးဇူးပြု၍ အမည်၊ ဖုန်းနံပါတ်နှင့် လိပ်စာ အချက်အလက်များကို ပြည့်စုံစွာ ဖြည့်ပေးပါ။"); return; }
+    
+    const message = `🌐 [SMK FIBER INTERNET]\n\nအင်တာနက်တပ်ဆင်လိုပါသည် -\n📦 PACKAGE: ${selectedPlanData.name} (${selectedPlanData.price})\n\n👤 CUSTOMER DETAILS:\nအမည်: ${name}\nဖုန်း: ${phone}\nလိပ်စာ: ${address}\n\n(တည်နေရာနှင့် အသေးစိတ်ကို ဆက်သွယ်ပေးပို့ပါမည်။)`;
+    const encodedMessage = encodeURIComponent(message);
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+    if (platform === 'telegram') {
+        if (isMobile) window.open(`https://t.me/+${STORE_PHONE}?text=${encodedMessage}`, '_blank');
+        else window.open(`tg://resolve?phone=${STORE_PHONE}&text=${encodedMessage}`, '_self');
+    } else if (platform === 'viber') {
+        if (isMobile) window.open(`viber://chat?number=%2B${STORE_PHONE}&draft=${encodedMessage}`, '_blank');
+        else window.open(`viber://chat?number=%2B${STORE_PHONE}&draft=${encodedMessage}`, '_self');
+    }
 }
 
 window.onclick = function(event) {
