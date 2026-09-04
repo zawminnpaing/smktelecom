@@ -100,10 +100,32 @@ body { font-family: 'Plus Jakarta Sans', 'Noto Sans Myanmar', sans-serif; color:
 .section-header h2 { font-size: 2.2rem; margin-bottom: 0.8rem; color: var(--brand-navy); line-height: 1.5; font-weight: 800;} 
 .section-header p { color: var(--text-muted); font-size: 1.05rem; }
 
-/* Promo Box */
+/* Promo Box & Highlights */
 .promo-banner { background: var(--brand-navy); border-radius: 20px; padding: 3rem; text-align: center; color: #fff; box-shadow: var(--shadow-lg); position: relative; overflow: hidden; }
 .promo-header h2 { font-size: 2rem; margin-bottom: 0.5rem; color: #fff; font-weight: 800; line-height: 1.5;}
 .promo-header p { color: #cbd5e1; margin-bottom: 2rem; }
+
+/* PROMOTIONAL HIGHLIGHTS (Moved from Hero) */
+.promo-highlights { 
+    display: flex; 
+    gap: 1.5rem; 
+    flex-wrap: wrap; 
+    justify-content: center;
+    font-size: 1rem; 
+    color: #fff; 
+    font-weight: 600; 
+    margin-bottom: 2.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+.promo-highlights .highlight-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
 .promo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
 .promo-box { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 2.8rem 2rem 2rem; text-align: center; position: relative; }
 .promo-box.highlighted { border-color: var(--brand-yellow); background: rgba(252, 190, 45, 0.08); }
@@ -209,7 +231,7 @@ body { font-family: 'Plus Jakarta Sans', 'Noto Sans Myanmar', sans-serif; color:
 .contact-form-col h3 { color: var(--brand-navy); font-size: 1.5rem; font-weight: 800; margin-bottom: 2rem; border-bottom: 2px solid var(--border-color); padding-bottom: 1rem;}
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
 
-/* MEGA FOOTER - Clickable Links Styled */
+/* MEGA FOOTER */
 .mega-footer { background: #0A0F1C; padding: 5rem 0 2rem; color: #fff; border-top: 4px solid var(--brand-teal); }
 .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1.5fr 1fr; gap: 3rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 3rem; margin-bottom: 2rem;}
 .footer-logo { font-size: 1.5rem; font-weight: 800; margin-bottom: 1rem; color: #fff; display: flex; align-items: center; gap: 0.5rem;}
@@ -267,6 +289,7 @@ body { font-family: 'Plus Jakarta Sans', 'Noto Sans Myanmar', sans-serif; color:
     .card-header h3 { font-size: 2.5rem; }
     .price-val { font-size: 2.2rem; }
     .promo-box { padding-top: 3.5rem; } 
+    .promo-highlights { flex-direction: column; align-items: flex-start; gap: 1rem; } /* Stack highlights on mobile */
     .footer-grid { grid-template-columns: 1fr; text-align: center; }
     .contact-list li { justify-content: center; }
     .modal-overlay { padding: 1rem; }
